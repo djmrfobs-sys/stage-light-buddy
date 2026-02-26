@@ -171,3 +171,12 @@
   0%, 100% { transform: rotate(-5deg); opacity: 0.6; }
   50% { transform: rotate(12deg); opacity: 0.9; }
 }
+@keyframes beam-sway-warm-1 {
+  0%, 100% { transform: rotate(-6deg); opacity: 0.3; }
+  50% { transform: rotate(10deg); opacity: 0.6; }
+}
+@keyframes beam-sway-warm-2 {
+  0%, 100% { transform: rotate(4deg); opacity: 0.25; }
+  40% { transform: rotate(-8deg); opacity: 0.55; }
+  80% { transform: rotate(6deg); opacity: 0.35; }
+}

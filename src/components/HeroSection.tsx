@@ -15,6 +15,10 @@ const HeroSection = ({ onCalculate }: { onCalculate: () => void }) => {
         <div className="light-beam light-beam-3" />
         <div className="light-beam light-beam-4" />
         <div className="light-beam light-beam-5" />
+        <div className="light-beam-warm light-beam-warm-1" />
+        <div className="light-beam-warm light-beam-warm-2" />
+        <div className="light-beam-warm light-beam-warm-3" />
+        <div className="light-beam-warm light-beam-warm-4" />
       </div>
       <div className="relative z-10 container text-center px-4 py-20">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-2 animate-fade-up tracking-tight">
