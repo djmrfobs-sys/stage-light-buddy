@@ -103,6 +103,22 @@
     will-change: transform;
   }
 
+  .light-beam-warm {
+    position: absolute;
+    top: -10%;
+    width: 5px;
+    height: 120%;
+    background: linear-gradient(
+      180deg,
+      hsl(45 90% 60% / 0.5) 0%,
+      hsl(40 80% 50% / 0.12) 40%,
+      transparent 80%
+    );
+    filter: blur(7px);
+    transform-origin: top center;
+    will-change: transform;
+  }
+
   .light-beam-1 {
     left: 15%;
     animation: beam-sway-1 8s ease-in-out infinite;
