@@ -8,6 +8,14 @@ const HeroSection = ({ onCalculate }: { onCalculate: () => void }) => {
         style={{ backgroundImage: `url(${heroImage})` }}
       />
       <div className="absolute inset-0 hero-overlay" />
+      {/* Animated light beams */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="light-beam light-beam-1" />
+        <div className="light-beam light-beam-2" />
+        <div className="light-beam light-beam-3" />
+        <div className="light-beam light-beam-4" />
+        <div className="light-beam light-beam-5" />
+      </div>
       <div className="relative z-10 container text-center px-4 py-20">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-2 animate-fade-up tracking-tight">
           <span className="text-gradient-gold">АНГАР</span>
