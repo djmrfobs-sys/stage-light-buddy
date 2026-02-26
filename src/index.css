@@ -139,6 +139,23 @@
     left: 85%;
     animation: beam-sway-2 11s ease-in-out infinite reverse;
   }
+
+  .light-beam-warm-1 {
+    left: 25%;
+    animation: beam-sway-warm-1 12s ease-in-out infinite;
+  }
+  .light-beam-warm-2 {
+    left: 45%;
+    animation: beam-sway-warm-2 9s ease-in-out infinite;
+  }
+  .light-beam-warm-3 {
+    left: 70%;
+    animation: beam-sway-warm-1 14s ease-in-out infinite reverse;
+  }
+  .light-beam-warm-4 {
+    left: 55%;
+    animation: beam-sway-warm-2 11s ease-in-out infinite reverse;
+  }
 }
 
 @keyframes beam-sway-1 {
