@@ -9,14 +9,20 @@ const HeroSection = ({ onCalculate }: { onCalculate: () => void }) => {
       />
       <div className="absolute inset-0 hero-overlay" />
       <div className="relative z-10 container text-center px-4 py-20">
-        <p className="text-primary/80 font-display text-sm md:text-base tracking-[0.3em] uppercase mb-4 animate-fade-up">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-2 animate-fade-up tracking-tight">
+          <span className="text-gradient-gold">АНГАР</span>
+        </h1>
+        <p className="text-xl sm:text-2xl md:text-3xl font-display font-medium tracking-[0.2em] uppercase mb-8 animate-fade-up text-foreground/80" style={{ animationDelay: "0.05s" }}>
+          AUDIOLIGHT
+        </p>
+        <p className="text-primary/80 font-display text-sm md:text-base tracking-[0.3em] uppercase mb-4 animate-fade-up" style={{ animationDelay: "0.1s" }}>
           Профессиональное световое оборудование
         </p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.15s" }}>
           Подбор сценического света
           <br />
           <span className="text-gradient-gold">для мероприятий</span>
-        </h1>
+        </h2>
         <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-10 animate-fade-up" style={{ animationDelay: "0.2s" }}>
           Рассчитайте стоимость аренды светового оборудования за 30 секунд.
           Готовые пакеты для площадок от 50 до 250 м².
