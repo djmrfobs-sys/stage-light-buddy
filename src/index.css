@@ -103,6 +103,22 @@
     will-change: transform;
   }
 
+  .light-beam-warm {
+    position: absolute;
+    top: -10%;
+    width: 5px;
+    height: 120%;
+    background: linear-gradient(
+      180deg,
+      hsl(45 90% 60% / 0.5) 0%,
+      hsl(40 80% 50% / 0.12) 40%,
+      transparent 80%
+    );
+    filter: blur(7px);
+    transform-origin: top center;
+    will-change: transform;
+  }
+
   .light-beam-1 {
     left: 15%;
     animation: beam-sway-1 8s ease-in-out infinite;
@@ -123,6 +139,23 @@
     left: 85%;
     animation: beam-sway-2 11s ease-in-out infinite reverse;
   }
+
+  .light-beam-warm-1 {
+    left: 25%;
+    animation: beam-sway-warm-1 12s ease-in-out infinite;
+  }
+  .light-beam-warm-2 {
+    left: 45%;
+    animation: beam-sway-warm-2 9s ease-in-out infinite;
+  }
+  .light-beam-warm-3 {
+    left: 70%;
+    animation: beam-sway-warm-1 14s ease-in-out infinite reverse;
+  }
+  .light-beam-warm-4 {
+    left: 55%;
+    animation: beam-sway-warm-2 11s ease-in-out infinite reverse;
+  }
 }
 
 @keyframes beam-sway-1 {
@@ -137,4 +170,13 @@
 @keyframes beam-sway-3 {
   0%, 100% { transform: rotate(-5deg); opacity: 0.6; }
   50% { transform: rotate(12deg); opacity: 0.9; }
+}
+@keyframes beam-sway-warm-1 {
+  0%, 100% { transform: rotate(-6deg); opacity: 0.3; }
+  50% { transform: rotate(10deg); opacity: 0.6; }
+}
+@keyframes beam-sway-warm-2 {
+  0%, 100% { transform: rotate(4deg); opacity: 0.25; }
+  40% { transform: rotate(-8deg); opacity: 0.55; }
+  80% { transform: rotate(6deg); opacity: 0.35; }
 }
