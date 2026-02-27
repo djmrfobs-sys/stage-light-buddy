@@ -61,6 +61,7 @@ const Index = () => {
           <div ref={requestRef}>
             <RequestForm />
           </div>
+          <SpecialEffects />
           <InfoBlocks />
           <FAQSection />
           <FinalCTA onCalculate={scrollToCalc} />
