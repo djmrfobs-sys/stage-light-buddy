@@ -30,7 +30,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-16 md:py-24 bg-secondary/30">
+    <section className="py-16 md:py-24 bg-secondary/30" id="faq">
       <div className="container px-4 max-w-2xl mx-auto">
         <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12">
           Частые <span className="text-gradient-gold">вопросы</span>
