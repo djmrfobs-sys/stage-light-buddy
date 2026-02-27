@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { packages, formatPrice, type Package } from "@/lib/packages";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <section className="py-16 md:py-24" id="packages">
       <div className="container px-4">
@@ -17,13 +25,21 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
               className="glass-card rounded-xl overflow-hidden group hover:border-primary/40 transition-all duration-300 animate-fade-up flex flex-col"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              <div
+                className="aspect-[4/3] overflow-hidden cursor-pointer relative"
+                onClick={() => setZoomedImage({ src: pkg.image, alt: `Пакет ${pkg.name}` })}
+              >
                 <img
                   src={pkg.image}
                   alt={`Пакет ${pkg.name}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain bg-black/50 group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <span className="text-foreground text-sm font-medium bg-background/70 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+                    Нажмите для увеличения
+                  </span>
+                </div>
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <h3 className="font-display font-bold text-xl text-primary mb-1">
@@ -52,6 +68,21 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
           ))}
         </div>
       </div>
+
+      <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-2 bg-background/95 backdrop-blur-xl border-border/50">
+          <DialogTitle className="sr-only">
+            {zoomedImage?.alt ?? "Увеличенное изображение"}
+          </DialogTitle>
+          {zoomedImage && (
+            <img
+              src={zoomedImage.src}
+              alt={zoomedImage.alt}
+              className="w-full h-full max-h-[85vh] object-contain rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
