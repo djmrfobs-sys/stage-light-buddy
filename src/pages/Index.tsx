@@ -9,6 +9,8 @@ import InfoBlocks from "@/components/InfoBlocks";
 import FAQSection from "@/components/FAQSection";
 import SpecialEffects from "@/components/SpecialEffects";
 import FinalCTA from "@/components/FinalCTA";
+import Navbar from "@/components/Navbar";
+import AboutSection from "@/components/AboutSection";
 
 type View = "idle" | "result" | "custom";
 
@@ -50,7 +52,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-14">
+      <Navbar />
       {view === "idle" && (
         <>
           <HeroSection onCalculate={scrollToCalc} />
@@ -64,6 +67,7 @@ const Index = () => {
           <SpecialEffects />
           <InfoBlocks />
           <FAQSection />
+          <AboutSection />
           <FinalCTA onCalculate={scrollToCalc} />
         </>
       )}
@@ -85,7 +89,7 @@ const Index = () => {
 
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm">
-          © 2026 АНГАР. Все права защищены.
+          © 2026 ANGAR. Все права защищены.
         </div>
       </footer>
     </div>
