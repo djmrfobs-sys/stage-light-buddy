@@ -37,6 +37,9 @@ const RequestForm = () => {
       description: "Мы свяжемся с вами в ближайшее время.",
     });
     setForm({ name: "", contact: "", date: "", address: "", comment: "" });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 500);
   };
 
   const inputClass =
