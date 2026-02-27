@@ -7,6 +7,7 @@ import CustomResult from "@/components/CustomResult";
 import RequestForm from "@/components/RequestForm";
 import InfoBlocks from "@/components/InfoBlocks";
 import FAQSection from "@/components/FAQSection";
+import SpecialEffects from "@/components/SpecialEffects";
 import FinalCTA from "@/components/FinalCTA";
 
 type View = "idle" | "result" | "custom";
