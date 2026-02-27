@@ -9,6 +9,7 @@ import InfoBlocks from "@/components/InfoBlocks";
 import FAQSection from "@/components/FAQSection";
 import SpecialEffects from "@/components/SpecialEffects";
 import FinalCTA from "@/components/FinalCTA";
+import Navbar from "@/components/Navbar";
 
 type View = "idle" | "result" | "custom";
 
