@@ -24,9 +24,6 @@ const HeroSection = ({ onCalculate }: { onCalculate: () => void }) => {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-2 animate-fade-up tracking-tight">
           <span className="text-gradient-gold">АНГАР</span>
         </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl font-display font-medium tracking-[0.2em] uppercase mb-8 animate-fade-up text-foreground/80" style={{ animationDelay: "0.05s" }}>
-          AUDIOLIGHT
-        </p>
         <p className="text-primary/80 font-display text-sm md:text-base tracking-[0.3em] uppercase mb-4 animate-fade-up" style={{ animationDelay: "0.1s" }}>
           Профессиональное световое оборудование
         </p>

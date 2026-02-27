@@ -85,7 +85,7 @@ const Index = () => {
 
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm">
-          © 2026 АНГАР AUDIOLIGHT. Все права защищены.
+          © 2026 АНГАР. Все права защищены.
         </div>
       </footer>
     </div>
