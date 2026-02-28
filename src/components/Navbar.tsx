@@ -64,22 +64,13 @@ const Navbar = () => {
               {l.label}
             </button>
           ))}
-          <button
-            onClick={() => setShowPhone(!showPhone)}
+          <a
+            href="tel:89182100584"
             className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
           >
             <Phone className="w-3.5 h-3.5" />
             Позвонить
-          </button>
-          {showPhone && (
-            <a
-              href="tel:89182100584"
-              className="flex items-center gap-1.5 text-sm font-semibold text-primary pl-5"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              8-918-210-05-84
-            </a>
-          )}
+          </a>
         </div>
       )}
     </nav>
