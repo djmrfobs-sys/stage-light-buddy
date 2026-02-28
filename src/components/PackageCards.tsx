@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 
 const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
-  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null);
+  const [zoomedPkg, setZoomedPkg] = useState<Package | null>(null);
 
   return (
     <section className="py-16 md:py-24" id="packages">
@@ -27,7 +27,7 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
             >
               <div
                 className="aspect-[4/3] overflow-hidden cursor-pointer relative"
-                onClick={() => setZoomedImage({ src: pkg.image, alt: `Пакет ${pkg.name}` })}
+                onClick={() => setZoomedPkg(pkg)}
               >
                 <img
                   src={pkg.image}
@@ -37,7 +37,7 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <span className="text-foreground text-sm font-medium bg-background/70 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-                    Нажмите для увеличения
+                    Подробнее
                   </span>
                 </div>
               </div>
@@ -62,6 +62,9 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
                   <span className="font-display font-bold text-2xl text-gradient-gold">
                     {formatPrice(pkg.price)}
                   </span>
+                  <p className="text-muted-foreground text-xs mt-1">
+                    * В комплект не включена работа оператора
+                  </p>
                 </div>
               </div>
             </div>
@@ -69,17 +72,56 @@ const PackageCards = ({ onSelect }: { onSelect?: (pkg: Package) => void }) => {
         </div>
       </div>
 
-      <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-2 bg-background/95 backdrop-blur-xl border-border/50">
+      <Dialog open={!!zoomedPkg} onOpenChange={() => setZoomedPkg(null)}>
+        <DialogContent className="max-w-[90vw] md:max-w-4xl max-h-[90vh] p-0 bg-background/95 backdrop-blur-xl border-border/50 overflow-hidden">
           <DialogTitle className="sr-only">
-            {zoomedImage?.alt ?? "Увеличенное изображение"}
+            {zoomedPkg ? `Пакет ${zoomedPkg.name}` : "Информация о пакете"}
           </DialogTitle>
-          {zoomedImage && (
-            <img
-              src={zoomedImage.src}
-              alt={zoomedImage.alt}
-              className="w-full h-full max-h-[85vh] object-contain rounded-lg"
-            />
+          {zoomedPkg && (
+            <div className="flex flex-col md:flex-row h-full max-h-[85vh]">
+              {/* Info panel */}
+              <div className="md:w-2/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-b md:bg-gradient-to-r from-primary/5 to-transparent order-2 md:order-1">
+                <h3 className="font-display font-bold text-2xl text-primary mb-2">
+                  {zoomedPkg.name}
+                </h3>
+                <p className="text-muted-foreground text-sm mb-5">
+                  {zoomedPkg.description}
+                </p>
+
+                <div className="space-y-3 mb-6">
+                  {zoomedPkg.equipment.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-sm">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span className="text-foreground/80">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-muted-foreground text-sm">до {zoomedPkg.maxArea} м²</span>
+                  <span className="text-muted-foreground">·</span>
+                  <span className="text-muted-foreground text-sm">до {zoomedPkg.maxGuests} гостей</span>
+                </div>
+
+                <div className="pt-4 border-t border-border/30 mt-4">
+                  <span className="font-display font-bold text-2xl text-gradient-gold">
+                    {formatPrice(zoomedPkg.price)}
+                  </span>
+                  <p className="text-muted-foreground text-xs mt-1">
+                    * В комплект не включена работа оператора
+                  </p>
+                </div>
+              </div>
+
+              {/* Image */}
+              <div className="md:w-3/5 order-1 md:order-2">
+                <img
+                  src={zoomedPkg.image}
+                  alt={`Пакет ${zoomedPkg.name}`}
+                  className="w-full h-full max-h-[40vh] md:max-h-[85vh] object-contain bg-black/30"
+                />
+              </div>
+            </div>
           )}
         </DialogContent>
       </Dialog>
