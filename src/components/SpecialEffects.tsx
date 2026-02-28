@@ -3,13 +3,13 @@ import { Sparkles } from "lucide-react";
 const effects = [
   {
     num: 1,
-    title: "Дневной фейерверк",
-    description: null,
+    title: "Дневной веерный салют",
+    description: "Веерный или прямой, от 25 до 100 залпов. Цвета есть на выбор.",
   },
   {
     num: 2,
     title: "Конфетти",
-    description: "8 000 ₽",
+    description: "от 8 000 ₽",
   },
   {
     num: 3,
