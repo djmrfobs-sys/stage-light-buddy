@@ -12,6 +12,7 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
+  const [showPortfolio, setShowPortfolio] = useState(false);
 
   const handleClick = (href: string) => {
     setOpen(false);
