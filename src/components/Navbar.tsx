@@ -112,9 +112,15 @@ const Navbar = () => {
             <DialogTitle className="text-2xl font-display">Портфолио</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 py-4">
-            <p className="col-span-full text-center text-muted-foreground">
-              Фотографии скоро появятся — отправьте их мне в чат!
-            </p>
+            {portfolioImages.map((img, i) => (
+              <img
+                key={i}
+                src={img.src}
+                alt={img.alt}
+                className="rounded-lg object-cover w-full aspect-[4/3] hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            ))}
           </div>
         </DialogContent>
       </Dialog>
