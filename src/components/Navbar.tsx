@@ -19,9 +19,7 @@ import portfolio16 from "@/assets/portfolio-16.jpg";
 const portfolioImages = [
   { src: portfolio1, alt: "Латиноамериканский танец на сцене" },
   { src: portfolio2, alt: "Народный танец с световыми эффектами" },
-  { src: portfolio3, alt: "Оформление свадебного зала" },
   { src: portfolio4, alt: "Групповое выступление на сцене" },
-  { src: portfolio5, alt: "Свадебные фейерверки" },
   { src: portfolio6, alt: "Свадебный фейерверк для пары" },
   { src: portfolio7, alt: "Групповое шоу на сцене" },
   { src: portfolio8, alt: "Танцы на вечеринке" },
