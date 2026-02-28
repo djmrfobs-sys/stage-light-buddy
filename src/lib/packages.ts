@@ -11,6 +11,7 @@ export interface Package {
   price: number;
   image: string;
   description: string;
+  equipment: string[];
 }
 
 export const packages: Package[] = [
@@ -22,6 +23,11 @@ export const packages: Package[] = [
     price: 38000,
     image: packMini,
     description: "Компактный комплект для небольших площадок",
+    equipment: [
+      "4 световых тотема с приборами заливного и динамичного света",
+      "Подсветка президиума",
+      "Грамотная расстановка по площадке — без тёмных зон",
+    ],
   },
   {
     id: "medium",
@@ -31,6 +37,11 @@ export const packages: Package[] = [
     price: 48000,
     image: packMedium,
     description: "Оптимальный комплект для средних мероприятий",
+    equipment: [
+      "6 световых тотемов с приборами заливного и динамичного света",
+      "Подсветка президиума",
+      "Равномерное заполнение площадки светом — без тёмных зон",
+    ],
   },
   {
     id: "big",
@@ -40,6 +51,11 @@ export const packages: Package[] = [
     price: 70000,
     image: packBig,
     description: "Мощный комплект для крупных событий",
+    equipment: [
+      "8 световых тотемов с приборами заливного и динамичного света",
+      "Подсветка президиума",
+      "Полное покрытие площадки — ни одной тёмной зоны",
+    ],
   },
   {
     id: "maxi",
@@ -49,6 +65,11 @@ export const packages: Package[] = [
     price: 90000,
     image: packMaxi,
     description: "Максимальный комплект для масштабных шоу",
+    equipment: [
+      "10+ световых тотемов с приборами заливного и динамичного света",
+      "Подсветка президиума",
+      "Максимальное покрытие — идеально залитая площадка без тёмных зон",
+    ],
   },
 ];
 
