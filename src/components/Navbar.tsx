@@ -11,6 +11,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [showPhone, setShowPhone] = useState(false);
 
   const handleClick = (href: string) => {
     setOpen(false);
@@ -36,13 +37,26 @@ const Navbar = () => {
               {l.label}
             </button>
           ))}
-          <a
-            href="tel:89182100584"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            8-918-210-05-84
-          </a>
+          <div className="relative">
+            <button
+              onClick={() => setShowPhone(!showPhone)}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              Позвонить
+            </button>
+            {showPhone && (
+              <div className="absolute top-full right-0 mt-2 bg-background border border-border/50 rounded-lg p-3 shadow-xl backdrop-blur-xl animate-fade-up">
+                <a
+                  href="tel:89182100584"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors whitespace-nowrap"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  8-918-210-05-84
+                </a>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Mobile toggle */}
@@ -63,13 +77,22 @@ const Navbar = () => {
               {l.label}
             </button>
           ))}
-          <a
-            href="tel:89182100584"
-            className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50"
+          <button
+            onClick={() => setShowPhone(!showPhone)}
+            className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
           >
             <Phone className="w-3.5 h-3.5" />
-            8-918-210-05-84
-          </a>
+            Позвонить
+          </button>
+          {showPhone && (
+            <a
+              href="tel:89182100584"
+              className="flex items-center gap-1.5 text-sm font-semibold text-primary pl-5"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              8-918-210-05-84
+            </a>
+          )}
         </div>
       )}
     </nav>
