@@ -11,6 +11,7 @@ export interface Package {
   price: number;
   image: string;
   description: string;
+  equipment: string[];
 }
 
 export const packages: Package[] = [
