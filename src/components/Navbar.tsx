@@ -3,9 +3,7 @@ import { Menu, X, Phone, Image } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
-import portfolio3 from "@/assets/portfolio-3.jpg";
 import portfolio4 from "@/assets/portfolio-4.jpg";
-import portfolio5 from "@/assets/portfolio-5.jpg";
 import portfolio6 from "@/assets/portfolio-6.jpg";
 import portfolio7 from "@/assets/portfolio-7.jpg";
 import portfolio8 from "@/assets/portfolio-8.jpg";
@@ -21,9 +19,7 @@ import portfolio16 from "@/assets/portfolio-16.jpg";
 const portfolioImages = [
   { src: portfolio1, alt: "Латиноамериканский танец на сцене" },
   { src: portfolio2, alt: "Народный танец с световыми эффектами" },
-  { src: portfolio3, alt: "Оформление свадебного зала" },
   { src: portfolio4, alt: "Групповое выступление на сцене" },
-  { src: portfolio5, alt: "Свадебные фейерверки" },
   { src: portfolio6, alt: "Свадебный фейерверк для пары" },
   { src: portfolio7, alt: "Групповое шоу на сцене" },
   { src: portfolio8, alt: "Танцы на вечеринке" },
