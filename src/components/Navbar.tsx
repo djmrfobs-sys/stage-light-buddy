@@ -6,6 +6,13 @@ import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
 import portfolio4 from "@/assets/portfolio-4.jpg";
 import portfolio5 from "@/assets/portfolio-5.jpg";
+import portfolio6 from "@/assets/portfolio-6.jpg";
+import portfolio7 from "@/assets/portfolio-7.jpg";
+import portfolio8 from "@/assets/portfolio-8.jpg";
+import portfolio9 from "@/assets/portfolio-9.jpg";
+import portfolio10 from "@/assets/portfolio-10.jpg";
+import portfolio11 from "@/assets/portfolio-11.jpg";
+import portfolio12 from "@/assets/portfolio-12.jpg";
 
 const portfolioImages = [
   { src: portfolio1, alt: "Латиноамериканский танец на сцене" },
@@ -13,6 +20,13 @@ const portfolioImages = [
   { src: portfolio3, alt: "Оформление свадебного зала" },
   { src: portfolio4, alt: "Групповое выступление на сцене" },
   { src: portfolio5, alt: "Свадебные фейерверки" },
+  { src: portfolio6, alt: "Свадебный фейерверк для пары" },
+  { src: portfolio7, alt: "Групповое шоу на сцене" },
+  { src: portfolio8, alt: "Танцы на вечеринке" },
+  { src: portfolio9, alt: "Фейерверк-вертушки для молодожёнов" },
+  { src: portfolio10, alt: "Световое и звуковое оборудование" },
+  { src: portfolio11, alt: "Оформление банкетного зала" },
+  { src: portfolio12, alt: "Силуэты танцоров в синем свете" },
 ];
 
 const navLinks = [
