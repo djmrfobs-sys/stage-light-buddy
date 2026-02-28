@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { Menu, X, Phone, Image } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import portfolio1 from "@/assets/portfolio-1.jpg";
+import portfolio2 from "@/assets/portfolio-2.jpg";
+import portfolio3 from "@/assets/portfolio-3.jpg";
+import portfolio4 from "@/assets/portfolio-4.jpg";
+import portfolio5 from "@/assets/portfolio-5.jpg";
+
+const portfolioImages = [
+  { src: portfolio1, alt: "Латиноамериканский танец на сцене" },
+  { src: portfolio2, alt: "Народный танец с световыми эффектами" },
+  { src: portfolio3, alt: "Оформление свадебного зала" },
+  { src: portfolio4, alt: "Групповое выступление на сцене" },
+  { src: portfolio5, alt: "Свадебные фейерверки" },
+];
 
 const navLinks = [
   { label: "Пакеты", href: "#packages" },
