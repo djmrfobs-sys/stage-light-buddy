@@ -38,8 +38,8 @@ const RequestForm = () => {
     });
     setForm({ name: "", contact: "", date: "", address: "", comment: "" });
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 500);
+      window.open("https://t.me/angar_show_bot", "_blank");
+    }, 1000);
   };
 
   const inputClass =

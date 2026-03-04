@@ -142,7 +142,7 @@ const Navbar = () => {
             <DialogTitle className="text-2xl font-display">Портфолио</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 py-4">
-            {portfolioImages.map((img, i) => (
+            {[...portfolioImages].sort(() => Math.random() - 0.5).map((img, i) => (
               <img
                 key={i}
                 src={img.src}
