@@ -54,10 +54,34 @@ const navLinks = [
   { label: "О нас", href: "#about" },
 ];
 
+const sectionIds = ["top", "packages", "calculator", "effects", "faq", "about"];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        setActiveSection("top");
+        return;
+      }
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            setActiveSection(sectionIds[i]);
+            return;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleClick = (href: string) => {
     setOpen(false);
