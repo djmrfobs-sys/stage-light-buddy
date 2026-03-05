@@ -38,7 +38,7 @@ const RequestForm = () => {
     });
     setForm({ name: "", contact: "", date: "", address: "", comment: "" });
     setTimeout(() => {
-      window.open("https://t.me/angar_show_bot", "_blank");
+      window.open("https://t.me/Angar_audiolight_bot", "_blank");
     }, 1000);
   };
 
