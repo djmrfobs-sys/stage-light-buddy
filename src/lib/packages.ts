@@ -46,7 +46,7 @@ export const packages: Package[] = [
   {
     id: "big",
     name: "BIG",
-    maxArea: 220,
+    maxArea: 210,
     maxGuests: 100,
     price: 70000,
     image: packBig,
