@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Phone, Image } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import portfolio1 from "@/assets/portfolio-1.jpg";
@@ -54,10 +54,34 @@ const navLinks = [
   { label: "О нас", href: "#about" },
 ];
 
+const sectionIds = ["top", "packages", "calculator", "effects", "faq", "about"];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        setActiveSection("top");
+        return;
+      }
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            setActiveSection(sectionIds[i]);
+            return;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleClick = (href: string) => {
     setOpen(false);
@@ -79,15 +103,19 @@ const Navbar = () => {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => handleClick(l.href)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                {l.label}
-              </button>
-            ))}
+            {navLinks.map((l) => {
+              const sectionId = l.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <button
+                  key={l.href}
+                  onClick={() => handleClick(l.href)}
+                  className={`text-sm transition-colors font-medium ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
+                >
+                  {l.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => setShowPortfolio(true)}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
@@ -113,15 +141,19 @@ const Navbar = () => {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 px-4 pb-4 space-y-3">
-            {navLinks.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => handleClick(l.href)}
-                className="block w-full text-left text-sm text-muted-foreground hover:text-primary transition-colors font-medium py-1.5"
-              >
-                {l.label}
-              </button>
-            ))}
+            {navLinks.map((l) => {
+              const sectionId = l.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <button
+                  key={l.href}
+                  onClick={() => handleClick(l.href)}
+                  className={`block w-full text-left text-sm transition-colors font-medium py-1.5 ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
+                >
+                  {l.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => { setShowPortfolio(true); setOpen(false); }}
               className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary w-full text-left py-1.5"
