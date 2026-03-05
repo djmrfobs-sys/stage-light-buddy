@@ -18,7 +18,7 @@ export const packages: Package[] = [
   {
     id: "mini",
     name: "MINI",
-    maxArea: 130,
+    maxArea: 120,
     maxGuests: 50,
     price: 38000,
     image: packMini,
@@ -32,7 +32,7 @@ export const packages: Package[] = [
   {
     id: "medium",
     name: "MEDIUM",
-    maxArea: 180,
+    maxArea: 170,
     maxGuests: 80,
     price: 48000,
     image: packMedium,
@@ -46,7 +46,7 @@ export const packages: Package[] = [
   {
     id: "big",
     name: "BIG",
-    maxArea: 220,
+    maxArea: 210,
     maxGuests: 100,
     price: 70000,
     image: packBig,
