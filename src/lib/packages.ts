@@ -18,7 +18,7 @@ export const packages: Package[] = [
   {
     id: "mini",
     name: "MINI",
-    maxArea: 130,
+    maxArea: 120,
     maxGuests: 50,
     price: 38000,
     image: packMini,
