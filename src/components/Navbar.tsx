@@ -46,6 +46,7 @@ const portfolioImages = [
 ];
 
 const navLinks = [
+  { label: "Главная", href: "#top" },
   { label: "Пакеты", href: "#packages" },
   { label: "Калькулятор", href: "#calculator" },
   { label: "Спецэффекты", href: "#effects" },
