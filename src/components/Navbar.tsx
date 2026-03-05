@@ -141,12 +141,15 @@ const Navbar = () => {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 px-4 pb-4 space-y-3">
-            {navLinks.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => handleClick(l.href)}
-                className="block w-full text-left text-sm text-muted-foreground hover:text-primary transition-colors font-medium py-1.5"
-              >
+            {navLinks.map((l) => {
+              const sectionId = l.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <button
+                  key={l.href}
+                  onClick={() => handleClick(l.href)}
+                  className={`block w-full text-left text-sm transition-colors font-medium py-1.5 ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
+                >
                 {l.label}
               </button>
             ))}
