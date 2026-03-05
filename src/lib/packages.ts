@@ -32,7 +32,7 @@ export const packages: Package[] = [
   {
     id: "medium",
     name: "MEDIUM",
-    maxArea: 180,
+    maxArea: 170,
     maxGuests: 80,
     price: 48000,
     image: packMedium,
