@@ -103,15 +103,19 @@ const Navbar = () => {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => handleClick(l.href)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                {l.label}
-              </button>
-            ))}
+            {navLinks.map((l) => {
+              const sectionId = l.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <button
+                  key={l.href}
+                  onClick={() => handleClick(l.href)}
+                  className={`text-sm transition-colors font-medium ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
+                >
+                  {l.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => setShowPortfolio(true)}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
