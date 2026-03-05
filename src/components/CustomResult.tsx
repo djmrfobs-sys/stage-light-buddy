@@ -12,7 +12,7 @@ const CustomResult = ({ onReset }: { onReset: () => void }) => {
           </p>
           <div className="flex flex-col gap-3">
             <a
-              href="https://t.me/"
+              href="https://t.me/Angar_audiolight_bot"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-primary text-primary-foreground font-display font-semibold py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 text-center"

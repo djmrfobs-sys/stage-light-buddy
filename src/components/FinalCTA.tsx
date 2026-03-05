@@ -16,7 +16,7 @@ const FinalCTA = ({ onCalculate }: { onCalculate: () => void }) => {
             Рассчитать стоимость
           </button>
           <a
-            href="https://t.me/"
+            href="https://t.me/Angar_audiolight_bot"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-secondary text-secondary-foreground font-display font-semibold text-lg px-8 py-4 rounded-lg border border-border hover:border-primary/30 transition-all duration-300"
