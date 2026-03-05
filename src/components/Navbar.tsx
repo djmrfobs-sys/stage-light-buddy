@@ -46,6 +46,7 @@ const portfolioImages = [
 ];
 
 const navLinks = [
+  { label: "Главная", href: "#top" },
   { label: "Пакеты", href: "#packages" },
   { label: "Калькулятор", href: "#calculator" },
   { label: "Спецэффекты", href: "#effects" },
@@ -60,6 +61,10 @@ const Navbar = () => {
 
   const handleClick = (href: string) => {
     setOpen(false);
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
   };
