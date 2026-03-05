@@ -61,6 +61,10 @@ const Navbar = () => {
 
   const handleClick = (href: string) => {
     setOpen(false);
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
   };
