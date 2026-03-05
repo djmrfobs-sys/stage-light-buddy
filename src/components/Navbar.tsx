@@ -150,9 +150,10 @@ const Navbar = () => {
                   onClick={() => handleClick(l.href)}
                   className={`block w-full text-left text-sm transition-colors font-medium py-1.5 ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
                 >
-                {l.label}
-              </button>
-            ))}
+                  {l.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => { setShowPortfolio(true); setOpen(false); }}
               className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary w-full text-left py-1.5"
