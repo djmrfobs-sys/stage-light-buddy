@@ -36,7 +36,8 @@ const NewsletterSection = () => {
           />
           <Button
             onClick={handleSubscribe}
-            className="w-full h-12 text-base font-display font-semibold glow-gold hover:glow-gold-strong transition-all duration-300"
+            disabled={!name.trim() || !email.trim()}
+            className="w-full h-12 text-base font-display font-semibold glow-gold hover:glow-gold-strong transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="w-4 h-4 mr-2" />
             Подписаться
