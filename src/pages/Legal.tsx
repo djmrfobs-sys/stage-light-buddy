@@ -29,7 +29,7 @@ const Legal = () => {
             </p>
             <ul className="mt-2 space-y-1">
               <li>ИНН: 231406735404</li>
-              <li>ОГРНИП: 312231421500020</li>
+              <li>ОГРН: 312231421500020</li>
               <li>Адрес: Краснодарский край, г. Лабинск, ул. Филатова, д. 45</li>
               <li>Телефон: 8-928-432-12-76</li>
               <li>Email: stargalaxy45@yandex.ru</li>
@@ -226,7 +226,7 @@ const Legal = () => {
               <p className="font-semibold text-foreground">ИП Киселев Артур Пшимахович</p>
               <ul className="mt-2 space-y-1">
                 <li>ИНН: 231406735404</li>
-                <li>ОГРНИП: 312231421500020</li>
+                <li>ОГРН: 312231421500020</li>
                 <li>Адрес: Краснодарский край, г. Лабинск, ул. Филатова, д. 45</li>
                 <li>Телефон: 8-928-432-12-76</li>
                 <li>Email: stargalaxy45@yandex.ru</li>

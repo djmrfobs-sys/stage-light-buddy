@@ -92,7 +92,7 @@ const Index = () => {
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm space-y-1">
           <p>© 2026 ИП Киселев А.П. Все права защищены.</p>
-          <p>ИНН: 231406735404 · ОГРНИП: 312231421500020</p>
+          <p>ИНН: 231406735404 · ОГРН: 312231421500020</p>
           <a href="/legal" className="inline-block text-primary/80 hover:text-primary transition-colors mt-1">
             Пользовательское соглашение и оферта
           </a>
