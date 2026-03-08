@@ -8,7 +8,7 @@ const NewsletterSection = () => {
   const [email, setEmail] = useState("");
 
   const handleSubscribe = () => {
-    window.open("https://t.me/Angar_audiolight_bot", "_blank", "noopener,noreferrer");
+    window.open("https://t.me/+oHYQF_GC30Y5ZWFi", "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -18,7 +18,7 @@ const NewsletterSection = () => {
           Подпишитесь на <span className="text-gradient-gold">рассылку</span>
         </h2>
         <p className="text-muted-foreground mb-8 text-sm md:text-base">
-          Узнавайте первыми о скидках, новинках и специальных предложениях
+          Новости в сфере сценического света
         </p>
         <div className="space-y-3">
           <Input
