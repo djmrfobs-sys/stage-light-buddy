@@ -11,6 +11,7 @@ import SpecialEffects from "@/components/SpecialEffects";
 import FinalCTA from "@/components/FinalCTA";
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
+import NewsletterSection from "@/components/NewsletterSection";
 
 type View = "idle" | "result" | "custom";
 
@@ -67,6 +68,7 @@ const Index = () => {
           <SpecialEffects />
           <InfoBlocks />
           <FAQSection />
+          <NewsletterSection />
           <AboutSection />
           <FinalCTA onCalculate={scrollToCalc} />
         </>
