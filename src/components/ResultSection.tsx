@@ -117,6 +117,9 @@ const ResultSection = ({
                       </div>
                       <p className="text-sm text-muted-foreground mt-0.5">{effect.description}</p>
                       <p className="text-sm font-semibold text-primary mt-1">{effect.priceLabel}</p>
+                      {effect.note && (
+                        <p className="text-xs text-muted-foreground/70 mt-0.5 italic">{effect.note}</p>
+                      )}
                     </div>
                     <div
                       className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
