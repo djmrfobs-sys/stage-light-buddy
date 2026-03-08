@@ -8,7 +8,7 @@ const NewsletterSection = () => {
   const [email, setEmail] = useState("");
 
   const handleSubscribe = () => {
-    window.open("https://t.me/Angar_audiolight_bot", "_blank", "noopener,noreferrer");
+    window.open("https://t.me/+oHYQF_GC30Y5ZWFi", "_blank", "noopener,noreferrer");
   };
 
   return (
