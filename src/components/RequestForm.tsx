@@ -20,8 +20,9 @@ const RequestForm = () => {
     comment: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
     const parsed = requestSchema.safeParse(form);
@@ -33,14 +34,38 @@ const RequestForm = () => {
       setErrors(fieldErrors);
       return;
     }
-    toast({
-      title: "Заявка отправлена!",
-      description: "Мы свяжемся с вами в ближайшее время.",
-    });
-    setForm({ name: "", contact: "", date: "", address: "", comment: "" });
-    setTimeout(() => {
-      window.open("https://t.me/Angar_audiolight_bot", "_blank");
-    }, 1000);
+
+    setSending(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-request", {
+        body: parsed.data,
+      });
+
+      if (error) {
+        console.error("Error sending request:", error);
+        toast({
+          title: "Ошибка отправки",
+          description: "Попробуйте ещё раз или напишите нам в Telegram.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами в ближайшее время.",
+      });
+      setForm({ name: "", contact: "", date: "", address: "", comment: "" });
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast({
+        title: "Ошибка отправки",
+        description: "Попробуйте ещё раз или напишите нам в Telegram.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass =
