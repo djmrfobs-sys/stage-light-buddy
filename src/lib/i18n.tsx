@@ -250,9 +250,14 @@ const translations = {
   "cal.booked": { ru: "Занято", en: "Booked" },
   "cal.pending": { ru: "Ожидает", en: "Pending" },
   "cal.free": { ru: "Свободно", en: "Available" },
-  "cal.dateBooked": { ru: "Эта дата уже занята. Выберите другую.", en: "This date is already booked. Please choose another." },
-  "cal.datePending": { ru: "На эту дату уже есть заявка. Выберите другую или свяжитесь с нами.", en: "This date has a pending request. Choose another or contact us." },
+  "cal.dateBooked": { ru: "Эта дата уже занята.", en: "This date is already booked." },
+  "cal.datePending": { ru: "На эту дату уже есть заявка.", en: "This date has a pending request." },
   "cal.legend": { ru: "Статус дат:", en: "Date status:" },
+  "cal.hasSolution": { ru: "Есть решение!", en: "We have a solution!" },
+  "cal.solutionDesc": { ru: "Наши коллеги готовы помочь вам с этой датой:", en: "Our colleagues are ready to help you with this date:" },
+  "cal.solutionNote": { ru: "Когда дозвонитесь — обязательно скажите, что вы от команды «Ангар»", en: "When you call — make sure to say you're from the \"Angar\" team" },
+  "cal.callColleague": { ru: "Связаться", en: "Call" },
+  "cal.closeSolution": { ru: "Закрыть", en: "Close" },
 
   // Footer
   "footer.rights": { ru: "© 2026 Все права защищены", en: "© 2026 All rights reserved" },

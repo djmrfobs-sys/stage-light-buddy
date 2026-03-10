@@ -54,16 +54,12 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return;
 
-    if (isDateBooked(date)) {
-      toast({ title: t("cal.booked"), description: t("cal.dateBooked"), variant: "destructive" });
+    if (isDateBooked(date) || isDatePending(date)) {
+      setShowSolution(true);
       return;
     }
 
-    if (isDatePending(date)) {
-      toast({ title: t("cal.pending"), description: t("cal.datePending"), variant: "destructive" });
-      return;
-    }
-
+    setShowSolution(false);
     setSelectedDate(date);
     setForm((prev) => ({ ...prev, date: format(date, "yyyy-MM-dd") }));
   };
