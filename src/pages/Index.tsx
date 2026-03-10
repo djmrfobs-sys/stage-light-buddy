@@ -52,6 +52,12 @@ const Index = () => {
     }, 100);
   };
 
+  const handleGoHome = () => {
+    setView("idle");
+    setResult(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen pt-14">
       <Navbar />
@@ -63,7 +69,7 @@ const Index = () => {
             <CalculatorForm onResult={handleResult} onCustom={handleCustom} />
           </div>
           <div ref={requestRef}>
-            <RequestForm />
+            <RequestForm onSuccess={handleGoHome} />
           </div>
           <SpecialEffects />
           <InfoBlocks />
@@ -80,14 +86,15 @@ const Index = () => {
             result={result}
             onReset={handleReset}
             onRequest={scrollToRequest}
+            onHome={handleGoHome}
           />
           <div ref={requestRef}>
-            <RequestForm />
+            <RequestForm onSuccess={handleGoHome} />
           </div>
         </>
       )}
 
-      {view === "custom" && <CustomResult onReset={handleReset} />}
+      {view === "custom" && <CustomResult onReset={handleReset} onHome={handleGoHome} />}
 
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm space-y-1">

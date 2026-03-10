@@ -1,4 +1,4 @@
-const CustomResult = ({ onReset }: { onReset: () => void }) => {
+const CustomResult = ({ onReset, onHome }: { onReset: () => void; onHome: () => void }) => {
   return (
     <section className="py-16 md:py-24">
       <div className="container px-4 max-w-lg mx-auto text-center">
@@ -24,6 +24,12 @@ const CustomResult = ({ onReset }: { onReset: () => void }) => {
               className="bg-secondary text-secondary-foreground font-display font-semibold py-4 rounded-lg border border-border hover:border-primary/30 transition-all duration-300"
             >
               Рассчитать заново
+            </button>
+            <button
+              onClick={onHome}
+              className="bg-secondary text-secondary-foreground font-display font-semibold py-4 rounded-lg border border-border hover:border-primary/30 transition-all duration-300"
+            >
+              На главную
             </button>
           </div>
         </div>
