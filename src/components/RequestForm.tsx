@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const requestSchema = z.object({
@@ -19,8 +20,9 @@ const RequestForm = () => {
     comment: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
     const parsed = requestSchema.safeParse(form);
@@ -32,14 +34,38 @@ const RequestForm = () => {
       setErrors(fieldErrors);
       return;
     }
-    toast({
-      title: "Заявка отправлена!",
-      description: "Мы свяжемся с вами в ближайшее время.",
-    });
-    setForm({ name: "", contact: "", date: "", address: "", comment: "" });
-    setTimeout(() => {
-      window.open("https://t.me/Angar_audiolight_bot", "_blank");
-    }, 1000);
+
+    setSending(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-request", {
+        body: parsed.data,
+      });
+
+      if (error) {
+        console.error("Error sending request:", error);
+        toast({
+          title: "Ошибка отправки",
+          description: "Попробуйте ещё раз или напишите нам в Telegram.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами в ближайшее время.",
+      });
+      setForm({ name: "", contact: "", date: "", address: "", comment: "" });
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast({
+        title: "Ошибка отправки",
+        description: "Попробуйте ещё раз или напишите нам в Telegram.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass =
@@ -90,9 +116,10 @@ const RequestForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-primary text-primary-foreground font-display font-semibold text-lg py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02]"
+            disabled={sending}
+            className="w-full bg-primary text-primary-foreground font-display font-semibold text-lg py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            Отправить заявку
+            {sending ? "Отправка..." : "Отправить заявку"}
           </button>
         </form>
       </div>
