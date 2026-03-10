@@ -94,7 +94,7 @@ const Index = () => {
         </>
       )}
 
-      {view === "custom" && <CustomResult onReset={handleReset} />}
+      {view === "custom" && <CustomResult onReset={handleReset} onHome={handleGoHome} />}
 
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm space-y-1">
