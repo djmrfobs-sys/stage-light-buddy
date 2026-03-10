@@ -20,6 +20,7 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [bookedDates, setBookedDates] = useState<BookedDate[]>([]);
+  const [showSolution, setShowSolution] = useState(false);
   const { t, lang } = useI18n();
 
   useEffect(() => {
