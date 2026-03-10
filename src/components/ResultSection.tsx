@@ -24,10 +24,12 @@ const ResultSection = ({
   result,
   onReset,
   onRequest,
+  onHome,
 }: {
   result: CalcResult;
   onReset: () => void;
   onRequest: () => void;
+  onHome: () => void;
 }) => {
   const { pkg, breakdown } = result;
   const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
