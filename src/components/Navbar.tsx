@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, Image } from "lucide-react";
+import { Menu, X, Phone, Image, Globe } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useI18n, type Lang } from "@/lib/i18n";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio4 from "@/assets/portfolio-4.jpg";
@@ -45,15 +46,6 @@ const portfolioImages = [
   { src: portfolio22, alt: "Молодожёны на фоне вечернего салюта" },
 ];
 
-const navLinks = [
-  { label: "Главная", href: "#top" },
-  { label: "Пакеты", href: "#packages" },
-  { label: "Калькулятор", href: "#calculator" },
-  { label: "Спецэффекты", href: "#effects" },
-  { label: "FAQ", href: "#faq" },
-  { label: "О нас", href: "#about" },
-];
-
 const sectionIds = ["top", "packages", "calculator", "effects", "faq", "about"];
 
 const Navbar = () => {
@@ -61,6 +53,16 @@ const Navbar = () => {
   const [showPhone, setShowPhone] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
+  const { t, lang, setLang } = useI18n();
+
+  const navLinks = [
+    { label: t("nav.home"), href: "#top" },
+    { label: t("nav.packages"), href: "#packages" },
+    { label: t("nav.calculator"), href: "#calculator" },
+    { label: t("nav.effects"), href: "#effects" },
+    { label: "FAQ", href: "#faq" },
+    { label: t("nav.about"), href: "#about" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,6 +95,10 @@ const Navbar = () => {
     el?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const toggleLang = () => {
+    setLang(lang === "ru" ? "en" : "ru");
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
@@ -121,21 +127,38 @@ const Navbar = () => {
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
             >
               <Image className="w-3.5 h-3.5" />
-              Портфолио
+              {t("nav.portfolio")}
+            </button>
+            <button
+              onClick={toggleLang}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+              title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {lang === "ru" ? "EN" : "RU"}
             </button>
             <button
               onClick={() => setShowPhone(!showPhone)}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
-              {showPhone ? "8-918-210-05-84" : "Позвонить"}
+              {showPhone ? "8-918-210-05-84" : t("nav.call")}
             </button>
           </div>
 
           {/* Mobile toggle */}
-          <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleLang}
+              className="inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Globe className="w-4 h-4" />
+              {lang === "ru" ? "EN" : "RU"}
+            </button>
+            <button onClick={() => setOpen(!open)} className="text-foreground">
+              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -159,14 +182,14 @@ const Navbar = () => {
               className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary w-full text-left py-1.5"
             >
               <Image className="w-3.5 h-3.5" />
-              Портфолио
+              {t("nav.portfolio")}
             </button>
             <button
               onClick={() => setShowPhone(!showPhone)}
               className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
             >
               <Phone className="w-3.5 h-3.5" />
-              {showPhone ? "8-918-210-05-84" : "Позвонить"}
+              {showPhone ? "8-918-210-05-84" : t("nav.call")}
             </button>
           </div>
         )}
@@ -176,7 +199,7 @@ const Navbar = () => {
       <Dialog open={showPortfolio} onOpenChange={setShowPortfolio}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-display">Портфолио</DialogTitle>
+            <DialogTitle className="text-2xl font-display">{t("nav.portfolio")}</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 py-4">
             {[...portfolioImages].sort(() => Math.random() - 0.5).map((img, i) => (
@@ -196,4 +219,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
