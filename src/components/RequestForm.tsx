@@ -11,7 +11,7 @@ const requestSchema = z.object({
   comment: z.string().max(1000).optional(),
 });
 
-const RequestForm = () => {
+const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [form, setForm] = useState({
     name: "",
     contact: "",
