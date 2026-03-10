@@ -69,7 +69,7 @@ const Index = () => {
             <CalculatorForm onResult={handleResult} onCustom={handleCustom} />
           </div>
           <div ref={requestRef}>
-            <RequestForm />
+            <RequestForm onSuccess={handleGoHome} />
           </div>
           <SpecialEffects />
           <InfoBlocks />

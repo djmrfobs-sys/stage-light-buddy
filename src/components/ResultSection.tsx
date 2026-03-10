@@ -163,14 +163,12 @@ const ResultSection = ({
           >
             Рассчитать заново
           </button>
-          <a
-            href="https://t.me/Angar_audiolight_bot"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-secondary text-secondary-foreground font-display font-semibold py-4 rounded-lg border border-border hover:border-primary/30 transition-all duration-300 text-center"
+          <button
+            onClick={onHome}
+            className="flex-1 bg-secondary text-secondary-foreground font-display font-semibold py-4 rounded-lg border border-border hover:border-primary/30 transition-all duration-300"
           >
-            Связаться в Telegram
-          </a>
+            На главную
+          </button>
         </div>
       </div>
     </section>
