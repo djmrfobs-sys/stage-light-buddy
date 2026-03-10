@@ -86,9 +86,10 @@ const Index = () => {
             result={result}
             onReset={handleReset}
             onRequest={scrollToRequest}
+            onHome={handleGoHome}
           />
           <div ref={requestRef}>
-            <RequestForm />
+            <RequestForm onSuccess={handleGoHome} />
           </div>
         </>
       )}
