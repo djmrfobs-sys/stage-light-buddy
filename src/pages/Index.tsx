@@ -12,6 +12,7 @@ import FinalCTA from "@/components/FinalCTA";
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
 import NewsletterSection from "@/components/NewsletterSection";
+import { useI18n } from "@/lib/i18n";
 
 type View = "idle" | "result" | "custom";
 
@@ -20,18 +21,15 @@ const Index = () => {
   const [result, setResult] = useState<CalcResult | null>(null);
   const calcRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   const scrollToCalc = () => {
     setView("idle");
     setResult(null);
-    setTimeout(() => {
-      calcRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    setTimeout(() => calcRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
   };
 
-  const scrollToRequest = () => {
-    requestRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToRequest = () => requestRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const handleResult = (res: CalcResult) => {
     setResult(res);
@@ -47,9 +45,7 @@ const Index = () => {
   const handleReset = () => {
     setView("idle");
     setResult(null);
-    setTimeout(() => {
-      calcRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    setTimeout(() => calcRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
   };
 
   const handleGoHome = () => {
@@ -82,12 +78,7 @@ const Index = () => {
 
       {view === "result" && result && (
         <>
-          <ResultSection
-            result={result}
-            onReset={handleReset}
-            onRequest={scrollToRequest}
-            onHome={handleGoHome}
-          />
+          <ResultSection result={result} onReset={handleReset} onRequest={scrollToRequest} onHome={handleGoHome} />
           <div ref={requestRef}>
             <RequestForm onSuccess={handleGoHome} />
           </div>
@@ -98,9 +89,9 @@ const Index = () => {
 
       <footer className="border-t border-border/50 py-8">
         <div className="container px-4 text-center text-muted-foreground text-sm space-y-1">
-          <p>© 2026 Все права защищены</p>
+          <p>{t("footer.rights")}</p>
           <a href="/legal" className="inline-block text-primary/80 hover:text-primary transition-colors mt-1">
-            Пользовательское соглашение и оферта
+            {t("footer.legal")}
           </a>
         </div>
       </footer>
