@@ -1,3 +1,5 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
@@ -10,6 +12,8 @@ Deno.serve(async (req) => {
 
   const TELEGRAM_BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN');
   const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
+  const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+  const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
@@ -21,6 +25,21 @@ Deno.serve(async (req) => {
 
   try {
     const { name, contact, date, address, comment } = await req.json();
+
+    // Save booked date to database
+    if (date && SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
+      const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+      const { error: dbError } = await supabase
+        .from('booked_dates')
+        .insert({
+          event_date: date,
+          status: 'pending',
+          client_name: name || null,
+        });
+      if (dbError) {
+        console.error('Error saving booked date:', dbError);
+      }
+    }
 
     const message = `📋 <b>Новая заявка с сайта!</b>
 

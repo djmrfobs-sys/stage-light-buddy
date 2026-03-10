@@ -1,13 +1,71 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
+import { ru as ruLocale } from "date-fns/locale";
+import { CalendarIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useI18n } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
+interface BookedDate {
+  event_date: string;
+  status: string;
+}
 
 const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [form, setForm] = useState({ name: "", contact: "", date: "", address: "", comment: "" });
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
-  const { t } = useI18n();
+  const [bookedDates, setBookedDates] = useState<BookedDate[]>([]);
+  const { t, lang } = useI18n();
+
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      const { data } = await supabase
+        .from("booked_dates")
+        .select("event_date, status");
+      if (data) setBookedDates(data);
+    };
+    fetchBookedDates();
+  }, []);
+
+  const confirmedDates = bookedDates
+    .filter((d) => d.status === "confirmed")
+    .map((d) => new Date(d.event_date + "T00:00:00"));
+
+  const pendingDates = bookedDates
+    .filter((d) => d.status === "pending")
+    .map((d) => new Date(d.event_date + "T00:00:00"));
+
+  const isDateBooked = (date: Date) => {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return bookedDates.some((d) => d.event_date === dateStr && d.status === "confirmed");
+  };
+
+  const isDatePending = (date: Date) => {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return bookedDates.some((d) => d.event_date === dateStr && d.status === "pending");
+  };
+
+  const handleDateSelect = (date: Date | undefined) => {
+    if (!date) return;
+
+    if (isDateBooked(date)) {
+      toast({ title: t("cal.booked"), description: t("cal.dateBooked"), variant: "destructive" });
+      return;
+    }
+
+    if (isDatePending(date)) {
+      toast({ title: t("cal.pending"), description: t("cal.datePending"), variant: "destructive" });
+      return;
+    }
+
+    setSelectedDate(date);
+    setForm((prev) => ({ ...prev, date: format(date, "yyyy-MM-dd") }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +89,10 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         return;
       }
       toast({ title: t("request.success"), description: t("request.successDesc") });
+      // Add date to local state immediately
+      setBookedDates((prev) => [...prev, { event_date: form.date, status: "pending" }]);
       setForm({ name: "", contact: "", date: "", address: "", comment: "" });
+      setSelectedDate(undefined);
       if (onSuccess) setTimeout(() => onSuccess(), 1500);
     } catch {
       toast({ title: t("request.error"), description: t("request.errorDesc"), variant: "destructive" });
@@ -46,9 +107,28 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const fields = [
     { key: "name", label: t("request.name"), placeholder: t("request.namePlaceholder"), type: "text" },
     { key: "contact", label: t("request.contact"), placeholder: t("request.contactPlaceholder"), type: "text" },
-    { key: "date", label: t("request.date"), placeholder: "", type: "date" },
     { key: "address", label: t("request.address"), placeholder: t("request.addressPlaceholder"), type: "text" },
   ];
+
+  const modifiers = {
+    booked: confirmedDates,
+    pending: pendingDates,
+  };
+
+  const modifiersStyles = {
+    booked: {
+      backgroundColor: "hsl(0 84% 60%)",
+      color: "white",
+      borderRadius: "6px",
+      opacity: 0.8,
+    },
+    pending: {
+      backgroundColor: "hsl(45 93% 47%)",
+      color: "white",
+      borderRadius: "6px",
+      opacity: 0.7,
+    },
+  };
 
   return (
     <section className="py-16 md:py-24" id="request">
@@ -65,6 +145,57 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
               {errors[field.key] && <p className="text-destructive text-sm mt-1">{errors[field.key]}</p>}
             </div>
           ))}
+
+          {/* Date picker with calendar */}
+          <div>
+            <label className="block text-sm font-medium mb-1.5">{t("request.date")}</label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  className={cn(
+                    inputClass,
+                    "flex items-center justify-between text-left",
+                    !selectedDate && "text-muted-foreground"
+                  )}
+                >
+                  {selectedDate
+                    ? format(selectedDate, "d MMMM yyyy", { locale: lang === "ru" ? ruLocale : undefined })
+                    : t("cal.pickDate")}
+                  <CalendarIcon className="w-4 h-4 opacity-50" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                  modifiers={modifiers}
+                  modifiersStyles={modifiersStyles}
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+                <div className="px-4 pb-3 flex flex-wrap gap-3 text-xs">
+                  <span className="text-muted-foreground">{t("cal.legend")}</span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: "hsl(0 84% 60%)" }} />
+                    {t("cal.booked")}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: "hsl(45 93% 47%)" }} />
+                    {t("cal.pending")}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-sm bg-secondary border border-border" />
+                    {t("cal.free")}
+                  </span>
+                </div>
+              </PopoverContent>
+            </Popover>
+            {errors.date && <p className="text-destructive text-sm mt-1">{errors.date}</p>}
+          </div>
+
           <div>
             <label className="block text-sm font-medium mb-1.5">{t("request.comment")}</label>
             <textarea value={form.comment} onChange={(e) => update("comment", e.target.value)} placeholder={t("request.commentPlaceholder")} rows={3} className={inputClass + " resize-none"} />
