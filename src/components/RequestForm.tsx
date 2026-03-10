@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { ru as ruLocale } from "date-fns/locale";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Phone, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useI18n } from "@/lib/i18n";
