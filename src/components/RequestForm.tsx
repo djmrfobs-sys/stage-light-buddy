@@ -116,9 +116,10 @@ const RequestForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-primary text-primary-foreground font-display font-semibold text-lg py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02]"
+            disabled={sending}
+            className="w-full bg-primary text-primary-foreground font-display font-semibold text-lg py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            Отправить заявку
+            {sending ? "Отправка..." : "Отправить заявку"}
           </button>
         </form>
       </div>
