@@ -245,6 +245,15 @@ const translations = {
   "val.date": { ru: "Укажите дату", en: "Select a date" },
   "val.address": { ru: "Укажите адрес площадки", en: "Enter venue address" },
 
+  // Calendar / booking
+  "cal.pickDate": { ru: "Выберите дату", en: "Pick a date" },
+  "cal.booked": { ru: "Занято", en: "Booked" },
+  "cal.pending": { ru: "Ожидает", en: "Pending" },
+  "cal.free": { ru: "Свободно", en: "Available" },
+  "cal.dateBooked": { ru: "Эта дата уже занята. Выберите другую.", en: "This date is already booked. Please choose another." },
+  "cal.datePending": { ru: "На эту дату уже есть заявка. Выберите другую или свяжитесь с нами.", en: "This date has a pending request. Choose another or contact us." },
+  "cal.legend": { ru: "Статус дат:", en: "Date status:" },
+
   // Footer
   "footer.rights": { ru: "© 2026 Все права защищены", en: "© 2026 All rights reserved" },
   "footer.legal": { ru: "Пользовательское соглашение и оферта", en: "Terms of Service & Public Offer" },
