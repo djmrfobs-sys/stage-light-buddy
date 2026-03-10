@@ -52,6 +52,12 @@ const Index = () => {
     }, 100);
   };
 
+  const handleGoHome = () => {
+    setView("idle");
+    setResult(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen pt-14">
       <Navbar />
