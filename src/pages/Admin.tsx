@@ -4,6 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -13,7 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
-import { LogOut, CheckCircle, XCircle, Clock, CalendarDays, RefreshCw } from "lucide-react";
+import { LogOut, CheckCircle, XCircle, Clock, CalendarDays, RefreshCw, Search, Filter } from "lucide-react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 
@@ -35,6 +43,8 @@ const Admin = () => {
   const [bookings, setBookings] = useState<BookedDate[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,6 +100,12 @@ const Admin = () => {
     await supabase.auth.signOut();
   };
 
+  const filteredBookings = bookings.filter((b) => {
+    const matchesStatus = statusFilter === "all" || b.status === statusFilter;
+    const matchesSearch = !searchQuery || (b.client_name?.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesStatus && matchesSearch;
+  });
+
   const stats = {
     total: bookings.length,
     pending: bookings.filter((b) => b.status === "pending").length,
@@ -133,16 +149,50 @@ const Admin = () => {
           ))}
         </div>
 
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Поиск по имени клиента..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-full sm:w-[200px]">
+              <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
+              <SelectValue placeholder="Статус" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Все статусы</SelectItem>
+              <SelectItem value="pending">Ожидает</SelectItem>
+              <SelectItem value="confirmed">Подтверждено</SelectItem>
+              <SelectItem value="cancelled">Отменено</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Table */}
         <Card className="border-border">
           <CardHeader>
-            <CardTitle className="text-foreground">Все бронирования</CardTitle>
+            <CardTitle className="text-foreground">
+              Все бронирования
+              {(statusFilter !== "all" || searchQuery) && (
+                <span className="ml-2 text-sm font-normal text-muted-foreground">
+                  ({filteredBookings.length} из {bookings.length})
+                </span>
+              )}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
               <p className="text-center text-muted-foreground py-8">Загрузка...</p>
-            ) : bookings.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">Нет бронирований</p>
+            ) : filteredBookings.length === 0 ? (
+              <p className="text-center text-muted-foreground py-8">
+                {bookings.length === 0 ? "Нет бронирований" : "Ничего не найдено"}
+              </p>
             ) : (
               <Table>
                 <TableHeader>
@@ -155,7 +205,7 @@ const Admin = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {bookings.map((booking) => {
+                  {filteredBookings.map((booking) => {
                     const cfg = statusConfig[booking.status] || statusConfig.pending;
                     const Icon = cfg.icon;
                     const isUpdating = updatingId === booking.id;
