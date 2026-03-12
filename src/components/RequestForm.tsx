@@ -207,26 +207,41 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
             {errors.date && <p className="text-destructive text-sm mt-1">{errors.date}</p>}
 
             {showSolution && (
-              <div className="mt-3 rounded-xl border border-primary/30 bg-primary/5 p-5 space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
-                <div className="flex items-start justify-between">
-                  <h4 className="font-display font-bold text-lg text-primary flex items-center gap-2">
-                    💡 {t("cal.hasSolution")}
-                  </h4>
-                  <button type="button" onClick={() => setShowSolution(false)} className="text-muted-foreground hover:text-foreground transition-colors">
-                    <X className="w-4 h-4" />
-                  </button>
+              <div className="fixed inset-0 z-[100] flex items-end justify-center pb-8 px-4 pointer-events-none">
+                <div className="w-full max-w-lg rounded-xl border border-primary/30 bg-background shadow-2xl p-6 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto">
+                  <div className="flex items-start justify-between">
+                    <h4 className="font-display font-bold text-xl text-primary flex items-center gap-2">
+                      💡 {t("cal.hasSolution")}
+                    </h4>
+                    <button type="button" onClick={() => { setShowSolution(false); setShowPhone(false); }} className="text-muted-foreground hover:text-foreground transition-colors">
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{t("cal.solutionDesc")}</p>
+                  
+                  {!showPhone ? (
+                    <button
+                      type="button"
+                      onClick={() => setShowPhone(true)}
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-display font-semibold px-6 py-3 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02]"
+                    >
+                      <Phone className="w-4 h-4" />
+                      {t("cal.callColleague")}
+                    </button>
+                  ) : (
+                    <a
+                      href="tel:+79180765567"
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-display font-semibold px-6 py-3 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02] animate-in fade-in duration-300"
+                    >
+                      <Phone className="w-4 h-4" />
+                      8-918-076-55-67
+                    </a>
+                  )}
+
+                  <p className="text-base font-semibold text-foreground italic border-l-2 border-primary/30 pl-3">
+                    {t("cal.solutionNote")}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">{t("cal.solutionDesc")}</p>
-                <a
-                  href="tel:+79180765567"
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-display font-semibold px-5 py-3 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-[1.02]"
-                >
-                  <Phone className="w-4 h-4" />
-                  {t("cal.callColleague")} · 8-918-076-55-67
-                </a>
-                <p className="text-xs text-muted-foreground/80 italic border-l-2 border-primary/30 pl-3">
-                  {t("cal.solutionNote")}
-                </p>
               </div>
             )}
           </div>
