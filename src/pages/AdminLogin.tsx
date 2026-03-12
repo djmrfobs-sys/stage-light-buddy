@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -12,18 +12,34 @@ const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate("/admin");
+    });
+  }, [navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+    if (isSignup) {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        toast({ title: "Ошибка регистрации", description: error.message, variant: "destructive" });
+      } else {
+        toast({ title: "Аккаунт создан!", description: "Вы вошли в систему." });
+        navigate("/admin");
+      }
     } else {
-      navigate("/admin");
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+      } else {
+        navigate("/admin");
+      }
     }
     setLoading(false);
   };
@@ -38,7 +54,7 @@ const AdminLogin = () => {
           <CardTitle className="text-foreground">Панель администратора</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -58,12 +74,20 @@ const AdminLogin = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={6}
                 className="mt-1"
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Вход..." : "Войти"}
+              {loading ? "..." : isSignup ? "Создать аккаунт" : "Войти"}
             </Button>
+            <button
+              type="button"
+              onClick={() => setIsSignup(!isSignup)}
+              className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isSignup ? "Уже есть аккаунт? Войти" : "Создать аккаунт"}
+            </button>
           </form>
         </CardContent>
       </Card>
