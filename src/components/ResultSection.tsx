@@ -9,11 +9,13 @@ const ResultSection = ({
   onReset,
   onRequest,
   onHome,
+  onEffectsChange,
 }: {
   result: CalcResult;
   onReset: () => void;
   onRequest: () => void;
   onHome: () => void;
+  onEffectsChange?: (effects: string[]) => void;
 }) => {
   const { pkg, breakdown } = result;
   const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
@@ -37,9 +39,11 @@ const ResultSection = ({
   ];
 
   const toggleEffect = (id: string) => {
-    setSelectedEffects((prev) =>
-      prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
-    );
+    setSelectedEffects((prev) => {
+      const next = prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id];
+      onEffectsChange?.(next);
+      return next;
+    });
   };
 
   return (
@@ -123,6 +127,9 @@ const ResultSection = ({
               ✓ {t("result.effectsSelected")} {selectedEffects.length}. {t("result.effectsCostNote")}
             </p>
           )}
+          <p className="text-xs text-muted-foreground/70 mt-4 italic border-l-2 border-primary/30 pl-3">
+            {t("result.effectsManagerNote")}
+          </p>
         </div>
 
         <div className="glass-card rounded-xl p-5 mb-8 border-primary/20">

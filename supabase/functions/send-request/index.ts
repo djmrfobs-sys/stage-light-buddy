@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { name, contact, date, address, comment } = await req.json();
+    const { name, contact, date, address, comment, packageName, packagePrice, totalPrice, extraHours, selectedEffects } = await req.json();
 
     // Save booked date to database
     if (date && SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
@@ -41,13 +41,33 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Build package info section
+    let packageInfo = '';
+    if (packageName) {
+      packageInfo = `\n\n📦 <b>Пакет:</b> ${packageName}`;
+      if (packagePrice) packageInfo += `\n💰 <b>Стоимость пакета:</b> ${Number(packagePrice).toLocaleString('ru-RU')} ₽`;
+      if (totalPrice) packageInfo += `\n💵 <b>Итого:</b> ${Number(totalPrice).toLocaleString('ru-RU')} ₽`;
+      if (extraHours && Number(extraHours) > 0) packageInfo += `\n⏱ <b>Доп. часы:</b> +${extraHours}`;
+    }
+
+    // Build effects section
+    let effectsInfo = '';
+    const effectNames: Record<string, string> = {
+      fireworks: '🎆 Дневной веерный салют',
+      fountains: '⛲ Холодные фонтаны',
+    };
+    if (selectedEffects && Array.isArray(selectedEffects) && selectedEffects.length > 0) {
+      const names = selectedEffects.map((e: string) => effectNames[e] || e).join(', ');
+      effectsInfo = `\n✨ <b>Спецэффекты:</b> ${names}`;
+    }
+
     const message = `📋 <b>Новая заявка с сайта!</b>
 
 👤 <b>Имя:</b> ${name || '—'}
 📞 <b>Контакт:</b> ${contact || '—'}
 📅 <b>Дата:</b> ${date || '—'}
 📍 <b>Адрес:</b> ${address || '—'}
-💬 <b>Комментарий:</b> ${comment || '—'}`;
+💬 <b>Комментарий:</b> ${comment || '—'}${packageInfo}${effectsInfo}`;
 
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,

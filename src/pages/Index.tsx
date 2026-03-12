@@ -19,6 +19,7 @@ type View = "idle" | "result" | "custom";
 const Index = () => {
   const [view, setView] = useState<View>("idle");
   const [result, setResult] = useState<CalcResult | null>(null);
+  const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
   const calcRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<HTMLDivElement>(null);
   const { t } = useI18n();
@@ -78,9 +79,9 @@ const Index = () => {
 
       {view === "result" && result && (
         <>
-          <ResultSection result={result} onReset={handleReset} onRequest={scrollToRequest} onHome={handleGoHome} />
+          <ResultSection result={result} onReset={handleReset} onRequest={scrollToRequest} onHome={handleGoHome} onEffectsChange={setSelectedEffects} />
           <div ref={requestRef}>
-            <RequestForm onSuccess={handleGoHome} />
+            <RequestForm onSuccess={handleGoHome} calcResult={result} selectedEffects={selectedEffects} />
           </div>
         </>
       )}

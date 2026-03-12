@@ -9,12 +9,15 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
+import type { CalcResult } from "@/components/CalculatorForm";
+import { formatPrice } from "@/lib/packages";
+
 interface BookedDate {
   event_date: string;
   status: string;
 }
 
-const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
+const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: () => void; calcResult?: CalcResult | null; selectedEffects?: string[] }) => {
   const [form, setForm] = useState({ name: "", contact: "", date: "", address: "", comment: "" });
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -80,7 +83,17 @@ const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     setSending(true);
 
     try {
-      const { error } = await supabase.functions.invoke("send-request", { body: form });
+      const body: Record<string, unknown> = { ...form };
+      if (calcResult) {
+        body.packageName = calcResult.pkg.name;
+        body.packagePrice = calcResult.breakdown.packageCost;
+        body.totalPrice = calcResult.breakdown.total;
+        body.extraHours = calcResult.breakdown.extraHours;
+      }
+      if (selectedEffects && selectedEffects.length > 0) {
+        body.selectedEffects = selectedEffects;
+      }
+      const { error } = await supabase.functions.invoke("send-request", { body });
       if (error) {
         toast({ title: t("request.error"), description: t("request.errorDesc"), variant: "destructive" });
         return;
