@@ -127,6 +127,9 @@ const ResultSection = ({
               ✓ {t("result.effectsSelected")} {selectedEffects.length}. {t("result.effectsCostNote")}
             </p>
           )}
+          <p className="text-xs text-muted-foreground/70 mt-4 italic border-l-2 border-primary/30 pl-3">
+            {t("result.effectsManagerNote")}
+          </p>
         </div>
 
         <div className="glass-card rounded-xl p-5 mb-8 border-primary/20">

@@ -79,9 +79,9 @@ const Index = () => {
 
       {view === "result" && result && (
         <>
-          <ResultSection result={result} onReset={handleReset} onRequest={scrollToRequest} onHome={handleGoHome} />
+          <ResultSection result={result} onReset={handleReset} onRequest={scrollToRequest} onHome={handleGoHome} onEffectsChange={setSelectedEffects} />
           <div ref={requestRef}>
-            <RequestForm onSuccess={handleGoHome} />
+            <RequestForm onSuccess={handleGoHome} calcResult={result} selectedEffects={selectedEffects} />
           </div>
         </>
       )}

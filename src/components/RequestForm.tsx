@@ -83,7 +83,17 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
     setSending(true);
 
     try {
-      const { error } = await supabase.functions.invoke("send-request", { body: form });
+      const body: Record<string, unknown> = { ...form };
+      if (calcResult) {
+        body.packageName = calcResult.pkg.name;
+        body.packagePrice = calcResult.breakdown.packageCost;
+        body.totalPrice = calcResult.breakdown.total;
+        body.extraHours = calcResult.breakdown.extraHours;
+      }
+      if (selectedEffects && selectedEffects.length > 0) {
+        body.selectedEffects = selectedEffects;
+      }
+      const { error } = await supabase.functions.invoke("send-request", { body });
       if (error) {
         toast({ title: t("request.error"), description: t("request.errorDesc"), variant: "destructive" });
         return;
