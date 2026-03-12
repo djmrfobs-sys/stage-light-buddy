@@ -24,6 +24,7 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
   const [sending, setSending] = useState(false);
   const [bookedDates, setBookedDates] = useState<BookedDate[]>([]);
   const [showSolution, setShowSolution] = useState(false);
+  const [showPhone, setShowPhone] = useState(false);
   const { t, lang } = useI18n();
 
   useEffect(() => {
