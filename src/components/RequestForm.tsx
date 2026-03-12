@@ -9,12 +9,15 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
+import type { CalcResult } from "@/components/CalculatorForm";
+import { formatPrice } from "@/lib/packages";
+
 interface BookedDate {
   event_date: string;
   status: string;
 }
 
-const RequestForm = ({ onSuccess }: { onSuccess?: () => void }) => {
+const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: () => void; calcResult?: CalcResult | null; selectedEffects?: string[] }) => {
   const [form, setForm] = useState({ name: "", contact: "", date: "", address: "", comment: "" });
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [errors, setErrors] = useState<Record<string, string>>({});
