@@ -12,18 +12,34 @@ const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate("/admin");
+    });
+  }, [navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+    if (isSignup) {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        toast({ title: "Ошибка регистрации", description: error.message, variant: "destructive" });
+      } else {
+        toast({ title: "Аккаунт создан!", description: "Вы вошли в систему." });
+        navigate("/admin");
+      }
     } else {
-      navigate("/admin");
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+      } else {
+        navigate("/admin");
+      }
     }
     setLoading(false);
   };
