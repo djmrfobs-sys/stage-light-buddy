@@ -9,11 +9,13 @@ const ResultSection = ({
   onReset,
   onRequest,
   onHome,
+  onEffectsChange,
 }: {
   result: CalcResult;
   onReset: () => void;
   onRequest: () => void;
   onHome: () => void;
+  onEffectsChange?: (effects: string[]) => void;
 }) => {
   const { pkg, breakdown } = result;
   const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
