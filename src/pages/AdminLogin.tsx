@@ -54,7 +54,7 @@ const AdminLogin = () => {
           <CardTitle className="text-foreground">Панель администратора</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -74,12 +74,20 @@ const AdminLogin = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={6}
                 className="mt-1"
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Вход..." : "Войти"}
+              {loading ? "..." : isSignup ? "Создать аккаунт" : "Войти"}
             </Button>
+            <button
+              type="button"
+              onClick={() => setIsSignup(!isSignup)}
+              className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isSignup ? "Уже есть аккаунт? Войти" : "Создать аккаунт"}
+            </button>
           </form>
         </CardContent>
       </Card>
