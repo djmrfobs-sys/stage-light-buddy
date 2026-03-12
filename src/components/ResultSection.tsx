@@ -39,9 +39,11 @@ const ResultSection = ({
   ];
 
   const toggleEffect = (id: string) => {
-    setSelectedEffects((prev) =>
-      prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
-    );
+    setSelectedEffects((prev) => {
+      const next = prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id];
+      onEffectsChange?.(next);
+      return next;
+    });
   };
 
   return (
