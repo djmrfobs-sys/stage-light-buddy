@@ -195,8 +195,8 @@ const translations = {
   "about.title": { ru: "О", en: "About" },
   "about.title2": { ru: "нас", en: "Us" },
   "about.desc": {
-    ru: "Мы — команда профессионалов в области сценического освещения. Создаём атмосферу для свадеб, корпоративов, концертов и любых мероприятий. Используем современное оборудование и уникальный авторский стиль, чтобы каждое событие стало незабываемым.",
-    en: "We are a team of professionals in stage lighting. We create ambiance for weddings, corporate events, concerts, and any occasions. We use modern equipment and a unique style to make every event unforgettable.",
+    ru: "Мы — команда «АНГАР» с опытом более 5 лет. Создаём атмосферу для свадеб, корпоративов, концертов и других мероприятий.\n\nДля нас свет — это не просто техника, а искусство. Мы работаем вживую, чувствуя музыку, настроение зала и каждый момент события. Используем современное оборудование и авторский стиль, чтобы превратить обычное пространство в настоящее световое шоу.\n\nМы делаем свою работу с душой, чтобы ваше событие стало по-настоящему незабываемым.",
+    en: "We are team «ANGAR» with over 5 years of experience. We create atmosphere for weddings, corporate events, concerts and other occasions.\n\nFor us, light is not just technology — it's art. We work live, feeling the music, the mood of the venue, and every moment of the event. We use modern equipment and our signature style to transform ordinary spaces into a real light show.\n\nWe do our work with passion, so your event becomes truly unforgettable.",
   },
   "about.events": { ru: "Мероприятий", en: "Events" },
   "about.experience": { ru: "Опыт работы", en: "Experience" },
