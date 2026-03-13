@@ -8,9 +8,11 @@ const AboutSection = () => {
         <h2 className="text-2xl md:text-4xl font-display font-bold mb-6">
           {t("about.title")} <span className="text-gradient-gold">{t("about.title2")}</span>
         </h2>
-        <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-          {t("about.desc")}
-        </p>
+        <div className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8 space-y-4">
+          {t("about.desc").split("\n\n").map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <div className="glass-card rounded-xl p-6">
             <span className="text-3xl font-display font-bold text-primary">500+</span>
