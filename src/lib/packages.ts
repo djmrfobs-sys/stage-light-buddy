@@ -33,7 +33,7 @@ export const packages: Package[] = [
     id: "medium",
     name: "MEDIUM",
     maxArea: 170,
-    maxGuests: 80,
+    maxGuests: 70,
     price: 48000,
     image: packMedium,
     description: "Оптимальный комплект для средних мероприятий",
