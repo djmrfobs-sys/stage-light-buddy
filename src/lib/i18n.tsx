@@ -99,7 +99,7 @@ const translations = {
   "result.addEffectsDesc": { ru: "Сделайте мероприятие незабываемым — добавьте эффектное шоу", en: "Make your event unforgettable — add a spectacular show" },
   "result.effectsSelected": { ru: "Выбрано эффектов:", en: "Effects selected:" },
   "result.effectsCostNote": { ru: "Точная стоимость будет рассчитана при оформлении заявки.", en: "Exact cost will be calculated when placing the order." },
-  "result.effectsManagerNote": { ru: "Всю подробную информацию об спецэффектах уточняйте у менеджера в Telegram (@Angar_audiolight_bot) или по телефону 8-918-076-55-67", en: "For detailed information about special effects, contact the manager on Telegram (@Angar_audiolight_bot) or call 8-918-076-55-67" },
+  "result.effectsManagerNote": { ru: "Всю подробную информацию об спецэффектах уточняйте у менеджера в Telegram (@Angar_audiolight_bot) или по телефону 8-918-210-05-84", en: "For detailed information about special effects, contact the manager on Telegram (@Angar_audiolight_bot) or call 8-918-210-05-84" },
   "result.note": {
     ru: "оператор света и транспортировка оплачиваются отдельно и не входят в базовую стоимость пакета.",
     en: "light operator and transportation are charged separately and not included in the base package price.",
