@@ -212,6 +212,13 @@ const Navbar = () => {
               {t("nav.portfolio")}
             </button>
             <button
+              onClick={() => { setShowReviews(true); setOpen(false); }}
+              className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary w-full text-left py-1.5"
+            >
+              <MessageCircleHeart className="w-3.5 h-3.5" />
+              {t("nav.reviews")}
+            </button>
+            <button
               onClick={() => setShowPhone(!showPhone)}
               className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
             >
