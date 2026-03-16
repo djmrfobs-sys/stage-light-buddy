@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, Image, Globe } from "lucide-react";
+import { Menu, X, Phone, Image, Globe, MessageCircleHeart } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useI18n, type Lang } from "@/lib/i18n";
 import portfolio1 from "@/assets/portfolio-1.jpg";
@@ -22,6 +22,14 @@ import portfolio19 from "@/assets/portfolio-19.jpg";
 import portfolio20 from "@/assets/portfolio-20.jpg";
 import portfolio21 from "@/assets/portfolio-21.jpg";
 import portfolio22 from "@/assets/portfolio-22.jpg";
+import review1 from "@/assets/review-1.jpg";
+import review2 from "@/assets/review-2.jpg";
+import review3 from "@/assets/review-3.jpg";
+import review4 from "@/assets/review-4.jpg";
+import review5 from "@/assets/review-5.jpg";
+import review6 from "@/assets/review-6.jpg";
+import review7 from "@/assets/review-7.jpg";
+import review8 from "@/assets/review-8.jpg";
 
 const portfolioImages = [
   { src: portfolio1, alt: "Латиноамериканский танец на сцене" },
@@ -46,12 +54,24 @@ const portfolioImages = [
   { src: portfolio22, alt: "Молодожёны на фоне вечернего салюта" },
 ];
 
+const reviewImages = [
+  { src: review1, alt: "Отзыв клиента 1" },
+  { src: review2, alt: "Отзыв клиента 2" },
+  { src: review3, alt: "Отзыв клиента 3" },
+  { src: review4, alt: "Отзыв клиента 4" },
+  { src: review5, alt: "Отзыв клиента 5" },
+  { src: review6, alt: "Отзыв клиента 6" },
+  { src: review7, alt: "Отзыв клиента 7" },
+  { src: review8, alt: "Отзыв клиента 8" },
+];
+
 const sectionIds = ["top", "packages", "calculator", "effects", "faq", "about"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
   const { t, lang, setLang } = useI18n();
 

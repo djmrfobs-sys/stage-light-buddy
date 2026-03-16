@@ -11,6 +11,7 @@ const translations = {
   "nav.faq": { ru: "FAQ", en: "FAQ" },
   "nav.about": { ru: "О нас", en: "About" },
   "nav.portfolio": { ru: "Портфолио", en: "Portfolio" },
+  "nav.reviews": { ru: "Отзывы", en: "Reviews" },
   "nav.call": { ru: "Позвонить", en: "Call us" },
 
   // Hero
