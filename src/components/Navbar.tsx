@@ -248,6 +248,36 @@ const Navbar = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Reviews Dialog */}
+      <Dialog open={showReviews} onOpenChange={setShowReviews}>
+        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-display">{t("nav.reviews")}</DialogTitle>
+          </DialogHeader>
+          <div className="py-4 space-y-6">
+            <div className="text-muted-foreground text-sm leading-relaxed space-y-3">
+              <p>
+                Наш сценический свет создаётся не только для атмосферы праздника, но и для идеального кадра. Мы выстраиваем освещение так, чтобы молодожёны выглядели естественно, эмоции передавались живо, а площадка выглядела эффектно и объёмно. Без жёстких теней, без пересветов — только чистый, гармоничный свет.
+              </p>
+              <p>
+                Поэтому фотографы и видеографы любят работать на площадках с нашим светом: кадры получаются живыми, атмосферными и по-настоящему киношными.
+              </p>
+            </div>
+            <div className="columns-1 sm:columns-2 gap-4 space-y-4">
+              {reviewImages.map((img, i) => (
+                <img
+                  key={i}
+                  src={img.src}
+                  alt={img.alt}
+                  className="rounded-lg w-full break-inside-avoid hover:scale-[1.02] transition-transform duration-300"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
