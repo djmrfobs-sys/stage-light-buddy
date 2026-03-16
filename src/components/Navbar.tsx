@@ -150,6 +150,13 @@ const Navbar = () => {
               {t("nav.portfolio")}
             </button>
             <button
+              onClick={() => setShowReviews(true)}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+            >
+              <MessageCircleHeart className="w-3.5 h-3.5" />
+              {t("nav.reviews")}
+            </button>
+            <button
               onClick={toggleLang}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
               title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
