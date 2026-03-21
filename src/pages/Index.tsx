@@ -60,7 +60,7 @@ const Index = () => {
       <Navbar />
       {view === "idle" && (
         <>
-          <HeroSection onCalculate={scrollToCalc} />
+          <HeroSection />
           <PackageCards />
           <div ref={calcRef}>
             <CalculatorForm onResult={handleResult} onCustom={handleCustom} />
