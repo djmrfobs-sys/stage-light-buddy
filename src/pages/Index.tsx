@@ -72,7 +72,7 @@ const Index = () => {
           <InfoBlocks />
           <FAQSection />
           <NewsletterSection />
-          <AboutSection />
+          <AboutSection onCalculate={scrollToCalc} />
           <FinalCTA onCalculate={scrollToCalc} />
         </>
       )}
