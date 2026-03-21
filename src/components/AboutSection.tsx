@@ -1,32 +1,22 @@
 import { useI18n } from "@/lib/i18n";
 
-const AboutSection = () => {
+const AboutSection = ({ onCalculate }: { onCalculate: () => void }) => {
   const { t } = useI18n();
   return (
     <section className="py-16 md:py-24" id="about">
       <div className="container px-4 max-w-3xl mx-auto text-center">
-        <h2 className="text-2xl md:text-4xl font-display font-bold mb-6">
-          {t("about.title")} <span className="text-gradient-gold">{t("about.title2")}</span>
+        <h2 className="text-2xl md:text-4xl font-display font-bold mb-4">
+          {t("calc.title1")} <span className="text-gradient-gold">{t("calc.title2")}</span>
         </h2>
-        <div className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8 space-y-4">
-          {t("about.desc").split("\n\n").map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <div className="glass-card rounded-xl p-6">
-            <span className="text-3xl font-display font-bold text-primary">500+</span>
-            <p className="text-muted-foreground text-sm mt-1">{t("about.events")}</p>
-          </div>
-          <div className="glass-card rounded-xl p-6">
-            <span className="text-3xl font-display font-bold text-primary">{t("about.years")}</span>
-            <p className="text-muted-foreground text-sm mt-1">{t("about.experience")}</p>
-          </div>
-          <div className="glass-card rounded-xl p-6">
-            <span className="text-3xl font-display font-bold text-primary">100%</span>
-            <p className="text-muted-foreground text-sm mt-1">{t("about.satisfaction")}</p>
-          </div>
-        </div>
+        <p className="text-muted-foreground text-base md:text-lg mb-8">
+          {t("hero.desc")}
+        </p>
+        <button
+          onClick={onCalculate}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-display font-semibold text-lg px-8 py-4 rounded-lg glow-gold hover:glow-gold-strong transition-all duration-300 hover:scale-105"
+        >
+          {t("hero.cta")}
+        </button>
       </div>
     </section>
   );
