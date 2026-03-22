@@ -70,7 +70,6 @@ const Index = () => {
             <RequestForm onSuccess={handleGoHome} />
           </div>
           <SpecialEffects />
-          <InfoBlocks />
           <FAQSection />
           <NewsletterSection />
           <AboutSection onCalculate={scrollToCalc} />

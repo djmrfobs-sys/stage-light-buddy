@@ -81,7 +81,6 @@ const Navbar = () => {
     { label: t("nav.calculator"), href: "#calculator" },
     { label: t("nav.effects"), href: "#effects" },
     { label: "FAQ", href: "#faq" },
-    { label: t("nav.about"), href: "#about" },
   ];
 
   useEffect(() => {
