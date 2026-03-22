@@ -65,7 +65,7 @@ const reviewImages = [
   { src: review8, alt: "Отзыв клиента 8" },
 ];
 
-const sectionIds = ["top", "packages", "calculator", "effects", "faq", "about"];
+const sectionIds = ["top", "packages", "calculator", "effects", "faq"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
