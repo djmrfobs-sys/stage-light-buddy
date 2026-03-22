@@ -20,23 +20,6 @@ const InfoBlocks = () => {
 
   return (
     <>
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="container px-4">
-          <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12">
-            {t("info.included")} <span className="text-gradient-gold">{t("info.included2")}</span> {t("info.included3")}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {included.map((item, i) => (
-              <div key={i} className="glass-card rounded-xl p-6 text-center animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                <item.icon className="w-10 h-10 text-primary mx-auto mb-4" />
-                <h3 className="font-display font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-16 md:py-24">
         <div className="container px-4">
           <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12">
@@ -50,6 +33,23 @@ const InfoBlocks = () => {
                   <h3 className="font-display font-semibold mb-1">{item.title}</h3>
                   <p className="text-muted-foreground text-sm">{item.desc}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-secondary/30">
+        <div className="container px-4">
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12">
+            {t("info.included")} <span className="text-gradient-gold">{t("info.included2")}</span> {t("info.included3")}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {included.map((item, i) => (
+              <div key={i} className="glass-card rounded-xl p-6 text-center animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
+                <item.icon className="w-10 h-10 text-primary mx-auto mb-4" />
+                <h3 className="font-display font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
