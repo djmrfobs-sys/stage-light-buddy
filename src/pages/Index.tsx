@@ -61,6 +61,7 @@ const Index = () => {
       {view === "idle" && (
         <>
           <HeroSection />
+          <InfoBlocks />
           <PackageCards />
           <div ref={calcRef}>
             <CalculatorForm onResult={handleResult} onCustom={handleCustom} />
