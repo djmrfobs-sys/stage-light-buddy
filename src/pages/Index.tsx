@@ -61,19 +61,17 @@ const Index = () => {
       {view === "idle" && (
         <>
           <HeroSection />
-          <InfoBlocks />
-          <PackageCards />
+          <FinalCTA onCalculate={scrollToCalc} />
           <div ref={calcRef}>
             <CalculatorForm onResult={handleResult} onCustom={handleCustom} />
           </div>
           <div ref={requestRef}>
             <RequestForm onSuccess={handleGoHome} />
           </div>
+          <PackageCards />
+          <InfoBlocks />
           <SpecialEffects />
           <FAQSection />
-          <NewsletterSection />
-          <AboutSection onCalculate={scrollToCalc} />
-          <FinalCTA onCalculate={scrollToCalc} />
         </>
       )}
 
