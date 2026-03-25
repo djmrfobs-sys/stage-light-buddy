@@ -72,8 +72,6 @@ const Index = () => {
           <InfoBlocks />
           <SpecialEffects />
           <FAQSection />
-          <NewsletterSection />
-          <AboutSection onCalculate={scrollToCalc} />
         </>
       )}
 
