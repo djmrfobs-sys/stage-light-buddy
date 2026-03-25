@@ -22,7 +22,7 @@ const InfoBlocks = () => {
     <>
       <section className="py-16 md:py-24">
         <div className="container px-4">
-          <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12">
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-center mb-12 animate-fade-in" style={{ animationDuration: '0.7s' }}>
             {t("info.benefits")} <span className="text-gradient-gold">{t("info.benefits2")}</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
