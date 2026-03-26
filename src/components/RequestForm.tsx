@@ -228,11 +228,11 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
                   </button>
                 </div>
                 <a
-                  href="tel:+79180765567"
+                  href="tel:+79182100584"
                   className="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  Позвонить менеджеру: 8-918-076-55-67
+                  Позвонить менеджеру: 8-918-210-05-84
                 </a>
               </div>
             )}
