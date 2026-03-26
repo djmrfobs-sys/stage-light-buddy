@@ -1,3 +1,5 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -33,10 +35,85 @@ Deno.serve(async (req) => {
     });
   }
 
+  const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+  const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+
   try {
     const update = await req.json();
     console.log('Received Telegram update:', JSON.stringify(update));
 
+    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    // Handle callback queries (button presses)
+    if (update.callback_query) {
+      const callbackQuery = update.callback_query;
+      const callbackData = callbackQuery.data || '';
+      const chatId = callbackQuery.message?.chat?.id;
+
+      // Answer callback to remove loading state
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/answerCallbackQuery`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ callback_query_id: callbackQuery.id }),
+      });
+
+      if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+        let bookingId: string | null = null;
+        let newStatus: string | null = null;
+
+        if (callbackData.startsWith('confirm_')) {
+          bookingId = callbackData.replace('confirm_', '');
+          newStatus = 'confirmed';
+        } else if (callbackData.startsWith('cancel_')) {
+          bookingId = callbackData.replace('cancel_', '');
+          newStatus = 'cancelled';
+        }
+
+        if (bookingId && newStatus) {
+          const { error: updateError } = await supabase
+            .from('booked_dates')
+            .update({ status: newStatus })
+            .eq('id', bookingId);
+
+          let responseText: string;
+          if (updateError) {
+            console.error('Error updating booking:', updateError);
+            responseText = '❌ Ошибка при обновлении статуса бронирования.';
+          } else {
+            responseText = newStatus === 'confirmed'
+              ? '✅ Бронирование подтверждено! Дата отмечена как забронированная на сайте.'
+              : '❌ Бронирование отменено.';
+          }
+
+          // Update the original message to show the result
+          if (callbackQuery.message?.message_id && chatId) {
+            const originalText = callbackQuery.message.text || '';
+            const statusLine = newStatus === 'confirmed'
+              ? '\n\n✅ <b>ПОДТВЕРЖДЕНО</b>'
+              : '\n\n❌ <b>ОТМЕНЕНО</b>';
+
+            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: chatId,
+                message_id: callbackQuery.message.message_id,
+                text: originalText + statusLine,
+                parse_mode: 'HTML',
+              }),
+            });
+          }
+        }
+      }
+
+      return new Response(JSON.stringify({ ok: true }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Handle regular messages
     const message = update.message;
     if (!message) {
       return new Response(JSON.stringify({ ok: true }), {
@@ -47,7 +124,6 @@ Deno.serve(async (req) => {
     const chatId = message.chat.id;
     const text = message.text || '';
 
-    // Determine reply based on message
     let replyText: string;
     if (text === '/start') {
       replyText = WELCOME_MESSAGE;
@@ -55,8 +131,6 @@ Deno.serve(async (req) => {
       replyText = DEFAULT_REPLY;
     }
 
-    // Send reply via Telegram Bot API
-    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     const response = await fetch(telegramUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -77,7 +151,7 @@ Deno.serve(async (req) => {
       console.error(`Telegram API error [${response.status}]:`, JSON.stringify(result));
     }
 
-    // Notify admin about new message (forward to admin chat)
+    // Notify admin about new message
     const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
     if (TELEGRAM_CHAT_ID && text !== '/start') {
       const userName = message.from?.first_name || 'Аноним';
