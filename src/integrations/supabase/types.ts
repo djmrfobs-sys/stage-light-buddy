@@ -38,6 +38,81 @@ export type Database = {
         }
         Relationships: []
       }
+      channel_posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          image_base64: string | null
+          posted_at: string | null
+          scheduled_for: string | null
+          status: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          image_base64?: string | null
+          posted_at?: string | null
+          scheduled_for?: string | null
+          status?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          image_base64?: string | null
+          posted_at?: string | null
+          scheduled_for?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      channel_settings: {
+        Row: {
+          channel_username: string
+          id: number
+          posting_enabled: boolean
+          updated_at: string
+        }
+        Insert: {
+          channel_username?: string
+          id: number
+          posting_enabled?: boolean
+          updated_at?: string
+        }
+        Update: {
+          channel_username?: string
+          id?: number
+          posting_enabled?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      post_schedule: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          hour: number
+          id: string
+          minute: number
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          hour: number
+          id?: string
+          minute: number
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          hour?: number
+          id?: string
+          minute?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
