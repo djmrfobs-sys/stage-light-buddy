@@ -216,6 +216,27 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
             </Popover>
             {errors.date && <p className="text-destructive text-sm mt-1">{errors.date}</p>}
 
+            {showPendingWarning && (
+              <div className="mt-3 p-4 rounded-lg border border-yellow-500/30 bg-yellow-500/10 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="flex items-start justify-between">
+                  <p className="text-sm text-yellow-200 flex items-start gap-2">
+                    <span className="text-lg leading-5">⚠️</span>
+                    <span>Уточните, пожалуйста, у менеджера, свободна ли эта дата или ожидает подтверждения.</span>
+                  </p>
+                  <button type="button" onClick={() => setShowPendingWarning(false)} className="text-muted-foreground hover:text-foreground transition-colors ml-2 shrink-0">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                <a
+                  href="tel:+79180765567"
+                  className="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  Позвонить менеджеру: 8-918-076-55-67
+                </a>
+              </div>
+            )}
+
             {showSolution && (
               <div className="fixed inset-0 z-[100] flex items-end justify-center pb-8 px-4 pointer-events-none">
                 <div className="w-full max-w-lg rounded-xl border border-primary/30 bg-background shadow-2xl p-6 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto">
