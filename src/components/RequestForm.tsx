@@ -55,15 +55,25 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
     return bookedDates.some((d) => d.event_date === dateStr && d.status === "pending");
   };
 
+  const [showPendingWarning, setShowPendingWarning] = useState(false);
+
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return;
 
-    if (isDateBooked(date) || isDatePending(date)) {
+    if (isDateBooked(date)) {
       setShowSolution(true);
+      setShowPendingWarning(false);
+      return;
+    }
+
+    if (isDatePending(date)) {
+      setShowPendingWarning(true);
+      setShowSolution(false);
       return;
     }
 
     setShowSolution(false);
+    setShowPendingWarning(false);
     setSelectedDate(date);
     setForm((prev) => ({ ...prev, date: format(date, "yyyy-MM-dd") }));
   };
