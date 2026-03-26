@@ -26,18 +26,24 @@ Deno.serve(async (req) => {
   try {
     const { name, contact, date, address, comment, packageName, packagePrice, totalPrice, extraHours, selectedEffects } = await req.json();
 
+    let bookingId: string | null = null;
+
     // Save booked date to database
     if (date && SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
       const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-      const { error: dbError } = await supabase
+      const { data: insertedData, error: dbError } = await supabase
         .from('booked_dates')
         .insert({
           event_date: date,
           status: 'pending',
           client_name: name || null,
-        });
+        })
+        .select('id')
+        .single();
       if (dbError) {
         console.error('Error saving booked date:', dbError);
+      } else if (insertedData) {
+        bookingId = insertedData.id;
       }
     }
 
@@ -69,6 +75,17 @@ Deno.serve(async (req) => {
 📍 <b>Адрес:</b> ${address || '—'}
 💬 <b>Комментарий:</b> ${comment || '—'}${packageInfo}${effectsInfo}`;
 
+    // Build inline keyboard with confirm/cancel buttons
+    const replyMarkup: any = {};
+    if (bookingId) {
+      replyMarkup.inline_keyboard = [
+        [
+          { text: '✅ Подтвердить', callback_data: `confirm_${bookingId}` },
+          { text: '❌ Отменить', callback_data: `cancel_${bookingId}` },
+        ],
+      ];
+    }
+
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
       {
@@ -78,6 +95,7 @@ Deno.serve(async (req) => {
           chat_id: TELEGRAM_CHAT_ID,
           text: message,
           parse_mode: 'HTML',
+          ...(bookingId ? { reply_markup: replyMarkup } : {}),
         }),
       }
     );
