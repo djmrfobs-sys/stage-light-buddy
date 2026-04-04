@@ -163,13 +163,27 @@ const Navbar = () => {
               <Globe className="w-3.5 h-3.5" />
               {lang === "ru" ? "EN" : "RU"}
             </button>
-            <button
-              onClick={() => setShowPhone(!showPhone)}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              {showPhone ? "8-918-210-05-84" : t("nav.call")}
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setShowPhone(!showPhone)}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                {t("nav.call")}
+              </button>
+              {showPhone && (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg p-3 space-y-2 z-50 min-w-[180px] animate-in fade-in slide-in-from-top-2 duration-200">
+                  <a href="tel:+79182100584" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors whitespace-nowrap">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-918-210-05-84
+                  </a>
+                  <a href="tel:+79284321276" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors whitespace-nowrap">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-928-432-12-76
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile toggle */}
@@ -217,13 +231,27 @@ const Navbar = () => {
               <MessageCircleHeart className="w-3.5 h-3.5" />
               {t("nav.reviews")}
             </button>
-            <button
-              onClick={() => setShowPhone(!showPhone)}
-              className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              {showPhone ? "8-918-210-05-84" : t("nav.call")}
-            </button>
+            <div className="pt-2 border-t border-border/50 space-y-2">
+              <button
+                onClick={() => setShowPhone(!showPhone)}
+                className="flex items-center gap-1.5 text-sm font-semibold text-primary w-full text-left"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                {t("nav.call")}
+              </button>
+              {showPhone && (
+                <div className="pl-5 space-y-2 animate-in fade-in duration-200">
+                  <a href="tel:+79182100584" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-918-210-05-84
+                  </a>
+                  <a href="tel:+79284321276" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-928-432-12-76
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </nav>
