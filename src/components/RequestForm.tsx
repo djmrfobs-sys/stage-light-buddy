@@ -227,13 +227,22 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <a
-                  href="tel:+79182100584"
-                  className="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-                >
-                  <Phone className="w-4 h-4" />
-                  Позвонить менеджеру: 8-918-210-05-84
-                </a>
+                <div className="flex flex-col gap-2 mt-3">
+                  <a
+                    href="tel:+79182100584"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    8-918-210-05-84
+                  </a>
+                  <a
+                    href="tel:+79284321276"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    8-928-432-12-76
+                  </a>
+                </div>
               </div>
             )}
 
