@@ -35,6 +35,21 @@ const RequestForm = ({ onSuccess, calcResult, selectedEffects }: { onSuccess?: (
       if (data) setBookedDates(data);
     };
     fetchBookedDates();
+
+    const channel = supabase
+      .channel("booked_dates_realtime")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "booked_dates" },
+        () => {
+          fetchBookedDates();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const confirmedDates = bookedDates
