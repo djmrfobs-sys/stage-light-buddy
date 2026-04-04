@@ -231,13 +231,27 @@ const Navbar = () => {
               <MessageCircleHeart className="w-3.5 h-3.5" />
               {t("nav.reviews")}
             </button>
-            <button
-              onClick={() => setShowPhone(!showPhone)}
-              className="flex items-center gap-1.5 text-sm font-semibold text-primary pt-2 border-t border-border/50 w-full text-left"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              {showPhone ? "8-918-210-05-84" : t("nav.call")}
-            </button>
+            <div className="pt-2 border-t border-border/50 space-y-2">
+              <button
+                onClick={() => setShowPhone(!showPhone)}
+                className="flex items-center gap-1.5 text-sm font-semibold text-primary w-full text-left"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                {t("nav.call")}
+              </button>
+              {showPhone && (
+                <div className="pl-5 space-y-2 animate-in fade-in duration-200">
+                  <a href="tel:+79182100584" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-918-210-05-84
+                  </a>
+                  <a href="tel:+79284321276" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+                    <Phone className="w-3.5 h-3.5" />
+                    8-928-432-12-76
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </nav>
