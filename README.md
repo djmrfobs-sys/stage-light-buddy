@@ -1,73 +1,28 @@
-# Welcome to your Lovable project
+# Stage Light Calculator
 
-## Project info
+Готовый prompt для вставки в Lovable
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Сделай современный адаптивный сайт-калькулятор по подбору сценического света для мероприятий. Сайт должен быть в тёмном премиальном стиле, mobile-first, на React + Tailwind. На главном экране покажи заголовок “Подбор сценического света для мероприятий”, подзаголовок, кнопку “Рассчитать стоимость” и 4 карточки пакетов: MINI, MEDIUM, BIG, MAXI. Для каждого пакета укажи параметры: MINI — до 130 м² и до 50 гостей, 38 000 ₽; MEDIUM — до 180 м² и до 80 гостей, 48 000 ₽; BIG — до 220 м² и до 100 гостей, 70 000 ₽; MAXI — до 250 м² и до 140 гостей, 90 000 ₽. Все цены — за 6 часов. Сделай калькулятор с полями: площадь помещения, количество гостей, длительность мероприятия в часах, формат мероприятия. После отправки формы сайт должен автоматически подбирать минимально подходящий пакет, а если параметры выходят за лимиты — показывать сообщение, что нужен индивидуальный расчёт. На экране результата покажи название пакета, крупное фото подходящего комплекта, базовую стоимость пакета, стоимость оператора света отдельной строкой (12 000 ₽ за 6 часов, оператор работает в лайв-режиме), транспортировку отдельной строкой (3 000 ₽), продление после 6 часов отдельной строкой (5 000 ₽ за каждый дополнительный час), и итоговую стоимость по формуле: пакет + 12 000 + 3 000 + доп.часы × 5 000. Отдельно покажи пояснение, что оператор и транспортировка не входят в базовую стоимость пакета. Добавь кнопки “Оставить заявку”, “Рассчитать заново”, “Связаться в Telegram”. Ниже сделай форму заявки с полями: имя, телефон или Telegram, дата мероприятия, адрес площадки, комментарий. Добавь блок “Что входит”, блок преимуществ, FAQ и финальный CTA. Сделай интерфейс чистым, понятным, продающим, с крупными кнопками и удобным мобильным UX.
 
-## How can I edit this code?
+This project was built with [Lovable](https://lovable.dev).
 
-There are several ways of editing your application.
+**Live app**: https://stage-light-buddy.lovable.app
 
-**Use Lovable**
+## Build with Lovable
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4102aa27-02d8-42bb-90f7-b4cdb6e4e2d5).
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
-**Use your preferred IDE**
+## Development
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
